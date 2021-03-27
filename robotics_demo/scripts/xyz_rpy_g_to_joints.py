@@ -9,10 +9,11 @@ import rospy
 from robotics_demo.msg import PositionCommand, JointPositions
 from shadow_arm import InverseKinematicsSolver
 import numpy as np
-
+import time
 # create a publisher to send joint commands out on
 pub = rospy.Publisher('joint_commands', JointPositions, queue_size=10)
 IKSolver = InverseKinematicsSolver()
+time_of_last_solve = time.time()
 
 def convert2jointCommand(p_cmd):
     '''
@@ -21,6 +22,12 @@ def convert2jointCommand(p_cmd):
     '''
     # Note, negative x to convert from unity coords to pybullet coords
     # print(p_cmd.pos_y)
+    global time_of_last_solve
+    global IKSolver
+    
+    if time.time() > time_of_last_solve + 3: # If we haven't solved in 3s, likely the env has been reset - reset the arm too!
+        IKSolver = InverseKinematicsSolver()
+
     x,y,z = -p_cmd.pos_x, p_cmd.pos_y, p_cmd.pos_z
     roll,pitch,yaw = p_cmd.rot_r, p_cmd.rot_p, p_cmd.rot_y  
     gripper = p_cmd.gripper
@@ -29,8 +36,9 @@ def convert2jointCommand(p_cmd):
     print(j_angs)
     j_angs = np.array(j_angs) * (180/np.pi) # Unity uses degrees. TODO: Should we convert for this inside the env? TODO: Remember to convet back if reading!
     # print(j_angs)
-    cmd = JointPositions(j_angs[0],j_angs[1], j_angs[2], j_angs[3], j_angs[4], j_angs[5], gripper)
+    cmd = JointPositions(j_angs[0],j_angs[1], j_angs[2], j_angs[3], j_angs[4], j_angs[5], gripper, int(time.time()))
     pub.publish(cmd)
+    time_of_last_solve = time.time() # reset the timer since last solve
    
 def listener():
     rospy.init_node('xyz_rpy_g_to_joints', anonymous=True)

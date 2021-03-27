@@ -20,10 +20,18 @@ rosparam load /catkin_ws/src/unity_robotics_env/configs.yaml
 rosrun robotics_demo server_endpoint.py
 
 source /catkin_ws/devel/setup.bash
-rosrun robotics_demo color_publisher.py
-
 rosrun robotics_demo xyz_rpy_g_to_joints.py
+
+source /catkin_ws/devel/setup.bash
+rosrun robotics_demo xyz_quat_g_to_xyz_rpy_g.py
+
+source /catkin_ws/devel/setup.bash
 rosrun robotics_demo consolidate_state.py
+
+
+<!-- source /catkin_ws/devel/setup.bash
+rosrun robotics_demo color_publisher.py -->
+
 
 # Unity 
 ROS IP Address - 127.0.0.1
@@ -68,3 +76,20 @@ https://github.com/Unity-Technologies/Unity-Robotics-Hub/blob/main/tutorials/qui
 6. Import the URDF as Y axis up, set base link to immovable, ensure URDF has a base link and no links with only inertial properties
 7. Use GUI horizontal sliders and xDrive to test movement
 8. Now, creating msgs!
+
+
+
+List of Todos!
+
+1. Add the gripper
+2. Control from VR - broadcast hand/controller position on the quat channel and convert it
+3. Broadcast object positions
+4. Integrate all reported objects
+5. Attach camera to shoulder and wrist
+6. Record ROS stuff for dataset
+7. Save state and replay deterministically 
+
+
+
+
+Need ros-numpy

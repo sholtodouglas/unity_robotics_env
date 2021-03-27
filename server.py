@@ -3,7 +3,7 @@
 import socket
 
 HOST = '172.17.0.2'  # Standard loopback interface address (localhost)
-PORT = 10000      # Port to listen on (non-privileged ports are > 1023)
+from test_params import PORT
 
 # HOST = 'localhost'  # Standard loopback interface address (localhost)
 # PORT = 10001      # Port to listen on (non-privileged ports are > 1023)

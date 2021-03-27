@@ -2,8 +2,8 @@
 
 import socket
 
-HOST = '192.168.150.81'  # The server's hostname or IP address
-PORT = 10000     # The port used by the server
+HOST = '10.0.0.80'  # The server's hostname or IP address
+from test_params import PORT
 
 with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     print(HOST, PORT)
@@ -11,4 +11,4 @@ with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
     s.sendall(b'Hello, world')
     data = s.recv(1024)
 
-print('Received', repr(data))
+print('Received', repr(data)) 
