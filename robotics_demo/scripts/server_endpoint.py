@@ -4,31 +4,32 @@
 import rospy
 
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService
-from robotics_demo.msg import ArmState, PosRot, UnityColor, JointPositions, PositionCommand, QuaternionCommand, FullState, ImageTest
-from robotics_demo.srv import PositionService
+from robotics_demo.msg import JointPositions, PositionCommand, QuaternionCommand, FullState, Goal
 from sensor_msgs.msg import Image
+from std_msgs.msg import Bool
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
-    buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 1024)
-    connections = rospy.get_param("/TCP_CONNECTIONS", 10)
+    buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 30000)
+    connections = rospy.get_param("/TCP_CONNECTIONS", 20)
     tcp_server = TcpServer(ros_node_name, buffer_size, connections)
     rospy.init_node(ros_node_name, anonymous=True)
     # Fix the subscribe thigns
     tcp_server.start({
         # Publishers and subscribers are w.r.t Unity
-        'pos_srv': RosService('position_service', PositionService),
-        # Allow the robot's sliders to also publish joint commands
+        # Allow the robot's sliders to also publish joint commands back to itself
         'joint_commands': RosPublisher('joint_commands', JointPositions, queue_size=1),
         # Publish joint commands to the robot to make it move
         'joint_publisher': RosSubscriber('joint_commands', JointPositions, tcp_server),
         # Subscribe to xyz_rpy_grip commands (these will come from AI or sliders) then rebroadcast joint_commands
         'xyz_rpy_g_command': RosPublisher('xyz_rpy_g_command', PositionCommand, queue_size=1),
-        # Subscribe to xyz_quat_grip commands (these will come from the vr controller), and rebroadcast the rpy_grip equivalent
+        # Subscribe to xyz_quat_grip commands (these will come from the vr controller),store in core logic
         'xyz_quat_g_command': RosPublisher('xyz_quat_g_command', QuaternionCommand, queue_size=1),
-        # Subscribe to the various state elements, e.g cube pos, door pos, img eventually
-        # TODO
+        # The state
         'state': RosPublisher('state', FullState, queue_size=1),
+        # Goals may come from the state, listen if so
+        'goal': RosPublisher('goal', Goal, queue_size=1),
+        'reset': RosPublisher('reset', Bool, queue_size=1),
         #'imageTest': RosPublisher('imageTest', ImageTest, queue_size=1),
     })
     

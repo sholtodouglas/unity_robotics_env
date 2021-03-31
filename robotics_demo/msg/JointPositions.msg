@@ -5,4 +5,4 @@ float32 wrist_1
 float32 wrist_2
 float32 wrist_3
 float32 gripper
-int64 time
+float64 time
