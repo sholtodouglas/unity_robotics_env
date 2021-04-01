@@ -6,14 +6,14 @@ import random
 import rospy
 import os
 import time 
-from robotics_demo.msg import ObsRequest
+from robotics_demo.msg import TimerBeat
 
 PACKAGE_LOCATION = os.path.dirname(os.path.realpath(__file__))[:-(len("/scripts"))] # remove "/scripts"
 
 CONTROL_FREQUENCY = 15 # Hz
 timestep = 0 
 # Request an obs from the environment at a set time, which results in an action being sent back by corelogic
-get_obs_pub = rospy.Publisher('beat', ObsRequest, queue_size=1)
+get_obs_pub = rospy.Publisher('beat', TimerBeat, queue_size=1)
 
 def listener():
     global timestep
@@ -29,7 +29,7 @@ def listener():
             try:
                 next_time = next_time + 1/CONTROL_FREQUENCY
                 print(timestep, t)
-                get_obs_pub.publish(ObsRequest(timestep, t))
+                get_obs_pub.publish(TimerBeat(timestep, t))
                 timestep += 1
             except:
                 return 
