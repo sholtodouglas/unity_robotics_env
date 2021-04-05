@@ -28,6 +28,9 @@ rosrun robotics_demo core_logic.py
 source /catkin_ws/devel/setup.bash
 rosrun robotics_demo timer_loop.py
 
+source /catkin_ws/devel/setup.bash
+rosrun robotics_demo recorder.py
+
 
 <!-- source /catkin_ws/devel/setup.bash
 rosrun robotics_demo color_publisher.py -->
@@ -88,3 +91,6 @@ List of Todos!
 5. Attach camera to shoulder and wrist
 6. Record ROS stuff for dataset
 7. Save state and replay deterministically 
+
+
+# (-0.8920287033165873, -0.22291259615495435, -1.910235427964787, -1.0097142591695119, 0.6779716923126915, 0.000988316049301452)23

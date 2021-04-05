@@ -4,7 +4,8 @@
 
 import random
 import rospy
-from robotics_demo.msg import FullState, ToRecord, QuaternionProprioState, PositionCommand, Goal, TimerBeat, RPYProprioState, AchievedGoal
+from robotics_demo.msg import Observation, ToRecord, QuaternionProprioState, PositionCommand, Goal, TimerBeat, RPYProprioState, \
+                                AchievedGoal, RPYState, ReplayInfo
 from sensor_msgs.msg import Image as ImageMsg
 from std_msgs.msg import String, Bool
 import pybullet
@@ -13,10 +14,11 @@ import os, inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 print("current_dir=" + currentdir)
 os.sys.path.insert(0, currentdir)
-from utils import rosImg_to_numpy, proprio_quat_to_rpy_vector, proprio_rpy_to_ROSmsg, ag_to_vector, ag_to_ROSmsg
-
+from utils import rosImg_to_numpy, proprio_quat_to_rpy_vector, proprio_rpy_to_ROSmsg, ag_to_vector, ag_to_ROSmsg, proprio_rpy_to_rpy_vector, unstack
+import np_to_multiarray
 import time 
 
+np.set_printoptions(suppress=True)
 PACKAGE_LOCATION = os.path.dirname(os.path.realpath(__file__))[:-(len("/scripts"))] # remove "/scripts"
 
 # This variable indicates whether it is being controlled by the env, e.g. through sliders or vr controller
@@ -24,27 +26,82 @@ ENV_CONTROLLED = True # It is default false, but set true by the environment on 
 
 # Stores the latest quaternion command from the VR controller, if active
 vr_controller_pos = PositionCommand(-0.4, 0.2, 0.0,0.0,0.0,0.0,0.0)
-
+default_vr_controller_pos =  PositionCommand(-0.4, 0.2, 0.0,0.0,0.0,0.0,0.0)
 # LMP stuff
 g = None # [1, GOAL_DIM] either state size or img embedding size
 replan_horizon = 15
 z = None # [1,LATENT_DIM] representing the latent plan
 # Store the values which will be updated by the reseprective callbacks for the actor to use
 shoulder_image = None
+ros_shoulder_image = None
 gripper_image = None
+ros_gripper_image = None
 proprioceptive_state = None
 achieved_goal = None
 full_state = None
 last_state_arrival_time = 0
 last_state_processed_time = 0  # unless updated then the if check will fail because 0 is too long ago
+last_vr_controller_time = 0
 
 # The publisher which sends out position commands that then get converted to joint commands by the IK node
 pos_cmd_pub = rospy.Publisher('xyz_rpy_g_command', PositionCommand, queue_size=1)
 # The publisher which sends out the consolidated state for the saver to save
 transition_pub = rospy.Publisher('timestep', ToRecord, queue_size=1)
+# The publisher which resets the non_arm elements of the state
+env_reset_pub = rospy.Publisher('reset_environment', AchievedGoal, queue_size=1)
+
+# resetting flag
+resetting = False
+# buffer of acts to replay from - if this is full, pop them off one by one!
+replay_acts = []
+
+def check_reset_convergence(proprio, ag, threshold = 0.05):
+    global proprioceptive_state, achieved_goal
+    proprio_checks = abs(proprio - proprioceptive_state) < threshold
+    ag_checks = abs(ag-achieved_goal) < threshold
+    all_checks = np.concatenate([proprio_checks, ag_checks])
+
+    if np.all(all_checks):
+        return True
+    else:
+        return False
+
+
 # A function which resets the environment
-def reset_env(state: FullState):
-    raise NotImplementedError
+def reset(state: RPYState):
+    resetting = True
+    t_reset = time.time()
+    pos_cmd_pub.publish(state.proprio)
+    env_reset_pub.publish(state.ag)
+    # keep looping until too much time has elapsed, or the state is sufficiently close to the desired one
+    np_proprio = proprio_rpy_to_rpy_vector(state.proprio)
+    np_ag = ag_to_vector(state.ag)
+    
+
+    r = rospy.Rate(10) # 10hz 
+    while not rospy.is_shutdown():
+        t = time.time()
+        if (t > t_reset+2):
+            print("Reset convegence timed out")
+            resetting = False
+            return
+        elif check_reset_convergence(np_proprio, np_ag):
+            print("Reset converged")
+            resetting = False
+            return
+        else:
+            pos_cmd_pub.publish(state.proprio)
+            env_reset_pub.publish(state.ag)
+        r.sleep() # ros sleep for a little while before checking convergence again
+            
+def replay(replay: ReplayInfo):
+    global replay_acts
+    acts = np_to_multiarray.to_numpy_f32(replay.acts) # should be T, 7 (ACT_DIM)
+    acts = unstack(acts) # will produce a list of acts we can pop from 
+    replay_acts += acts
+    reset(replay.resetState)
+
+
 
 # A series of functions which set the goal dependent on states or goal space
 def set_goal(goal: Goal):
@@ -67,23 +124,28 @@ def register_vr_controller(cmd: QuaternionProprioState):
     Whenever the VR controller updates, this updates 'vr_controller_pos' so that act can send that as the action
     instead of model outputs if a VR controller is plugged in 
     '''
-    global vr_controller_pos
+    global vr_controller_pos, last_vr_controller_time
     x,y,z,q1,q2,q3,q4,gripper = cmd.pos_x, cmd.pos_y, cmd.pos_z, cmd.q1, cmd.q2, cmd.q3, cmd.q4, cmd.gripper
     rpy = pybullet.getEulerFromQuaternion([-q2, -q1, q4, q3]) # yay for beautiful conversion between axis
     print(x,y,z, rpy)
     vr_controller_pos = PositionCommand(x,y,z,rpy[0], rpy[1], rpy[2], gripper)
+    last_vr_controller_time = time.time()
 
-def process_full_state(o: FullState):
+def process_observation(o: Observation):
     '''
     The full state will be sent out at Nh > controlHz by the env, listen to it, and save the relevant parts
     '''
     global shoulder_image, gripper_image, proprioceptive_state, \
-            achieved_goal, full_state, last_state_arrival_time, last_state_processed_time
+            achieved_goal, full_state, last_state_arrival_time, last_state_processed_time, ros_shoulder_image, ros_gripper_image
     last_state_arrival_time = time.time()
-    print("Processing state")
-    shoulder_image  = rosImg_to_numpy(o.shoulderImage)
-    gripper_image = rosImg_to_numpy(o.gripperImage)
+    
+    ros_shoulder_image = o.shoulderImage
+    shoulder_image  = rosImg_to_numpy(ros_shoulder_image)
+    ros_gripper_image = o.gripperImage
+    gripper_image = rosImg_to_numpy(ros_gripper_image)
+
     proprioceptive_state  = proprio_quat_to_rpy_vector(o.proprio)
+    # print(f"State: {proprioceptive_state}")
     achieved_goal = ag_to_vector(o.ag)
     full_state = np.concatenate([proprioceptive_state, achieved_goal])
     last_state_processed_time = time.time()
@@ -106,8 +168,11 @@ def act(b: TimerBeat):
     if act_begin_time-last_state_processed_time > 0.5:
         print("No recent env information - check connection")
         return 
+    elif resetting:
+        #print("Resetting - no action take")
+        return
     else:
-        print("acting")
+        
         #### Put these into the model ####
         # if o.timestep % replan_horizon == 0:
         #      actor.reset_states()
@@ -118,38 +183,37 @@ def act(b: TimerBeat):
 
         # Publish the action for the environment to take
         if ENV_CONTROLLED:
-            a = vr_controller_pos
-            
+            if time.time() > last_vr_controller_time + 2:
+                a = default_vr_controller_pos
+                
+            else:
+                a = vr_controller_pos
+        elif len(replay_acts) > 0: # if there are acts to replay, pop them off instead of taking our own
+            a = replay_acts.pop()
+        
         pos_cmd_pub.publish(a)
 
         # Consolidate o and a, include when it arrived, and how long model processing took, o has the initial request time
         proprio = proprio_rpy_to_ROSmsg(proprioceptive_state)
         ag = ag_to_ROSmsg(achieved_goal)
-        # TODO ADD THE to record step
-        # timestep = ToRecord(proprio, ag, shoulder_image, gripper_image, a, b.timestep,
-        #  last_state_arrival_time, last_state_processed_time,  b.time, act_begin_time, model_processed_time)
+        state = RPYState(proprio, ag)
+        timestep = ToRecord(state, ros_shoulder_image, ros_gripper_image, a, b.timestep,\
+            last_state_arrival_time, last_state_processed_time,  b.time, act_begin_time, model_processed_time)
         # # and publish this for the saver to record
-        # transition_pub.publish(timestep) 
-
-def reset(r: Bool):
-    '''
-    Presumably we want to reset the lstm here, reset the arm and env to a good pose
-    '''
-    raise NotImplementedError
-
-
+        transition_pub.publish(timestep) 
 
 
 
 def listener():
     rospy.init_node('core_logic')
     # Listens for states, sends out an xyzrpy action in response
-    rospy.Subscriber("state", FullState, process_full_state)
+    rospy.Subscriber("state", Observation, process_observation)
     rospy.Subscriber("beat", TimerBeat, act)
     # Listens for the VR controller pos, updates the variable to store it
     rospy.Subscriber("xyz_quat_g_command", QuaternionProprioState, register_vr_controller)
     rospy.Subscriber("goal", Goal, set_goal)
-    rospy.Subscriber("reset", Bool, reset)
+    rospy.Subscriber("reset", RPYState, reset) # state is the commanded info
+    rospy.Subscriber("replay", ReplayInfo, replay)
 
     rospy.spin()
 

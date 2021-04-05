@@ -4,9 +4,10 @@
 import rospy
 
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService
-from robotics_demo.msg import JointPositions, PositionCommand, QuaternionProprioState, FullState, Goal, ResetInfo
+from robotics_demo.msg import JointPositions, PositionCommand, QuaternionProprioState, Observation, Goal, RPYState, AchievedGoal
 from sensor_msgs.msg import Image
 from std_msgs.msg import Bool
+# from robotics_demo.srv import findIK
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
@@ -26,16 +27,18 @@ def main():
         # Subscribe to xyz_quat_grip commands (these will come from the vr controller),store in core logic
         'xyz_quat_g_command': RosPublisher('xyz_quat_g_command', QuaternionProprioState, queue_size=1),
         # The state
-        'state': RosPublisher('state', FullState, queue_size=1),
+        'state': RosPublisher('state', Observation, queue_size=1),
         # Goals may come from the state, listen if so
         'goal': RosPublisher('goal', Goal, queue_size=1),
         # Set goals in the environment
         'set_goal': RosSubscriber('set_goal', Goal, tcp_server),
-        # Get the 'reset' command from the controlller
-        'reset': RosPublisher('reset', Bool, queue_size=1),
-        # Send a state to reset to
-        'reset_state': RosSubscriber('reset_state', ResetInfo, tcp_server),
+        # Get the 'reset' command from the controller
+        'reset': RosPublisher('reset', RPYState, queue_size=1),
+        # Allows us to push environment updates to the robot
+        'reset_environment': RosSubscriber('reset_environment', AchievedGoal, tcp_server),
         #'imageTest': RosPublisher('imageTest', ImageTest, queue_size=1),
+        # getting the exact joint angles is highly fraught (clearly unity immature for robotics), so would rather get exact pose and return required IK
+        # which is much more accurate
     })
     
     rospy.spin()

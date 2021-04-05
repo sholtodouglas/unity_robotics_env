@@ -32,6 +32,7 @@ catkin_install_python(PROGRAMS
   scripts/timer_loop.py
   scripts/core_logic.py
   scripts/recorder.py
+  scripts/tests.py
   DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION}
 )
 

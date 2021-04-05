@@ -13,7 +13,7 @@ class InverseKinematicsSolver():
     While this isn't necessary for the panda, for some reason it is with the UR5
     '''
     
-    def __init__(self, connection_mode=p.DIRECT, base_pos=[0,0,0], base_orn=[-np.pi/2,-np.pi/2,0], ee_index=8, default_joints=[0, -0.892, -1.793, -1.910, -2.58, 0.677, 0.000988,0]):
+    def __init__(self, connection_mode=p.DIRECT, base_pos=[0,0,0], base_orn=[-np.pi/2,-np.pi/2,0], ee_index=8, default_joints=[0, -0.89202866, -0.22291248, -1.91023546, -1.00971437,  0.67797174,  0.0009883,0]):
         self.p = bullet_client.BulletClient(connection_mode=connection_mode)
         self.p.configureDebugVisualizer(p.COV_ENABLE_Y_AXIS_UP ,1)
         filename= "/ur5v2/ur5_robot.urdf"
@@ -61,11 +61,17 @@ class InverseKinematicsSolver():
         return self.p.calculateInverseKinematics(self.ur5,self.ee_index, pos,ori)[0:7]
 
 
+    def reset(self):
+        self.set_states(self.default_joints)
+
+
+
 
 
 if __name__ == "__main__":
     robot = InverseKinematicsSolver(connection_mode=p.GUI)
-
+    import time
+    time.sleep(5)
     def add_xyz_rpy_controls():
         controls = []
         controls.append(p.addUserDebugParameter("X", -1, 1, 0.4))

@@ -1,6 +1,4 @@
-RPYProprioState proprio  
-AchievedGoal ag
-ResetInfo resetState
+RPYState state
 sensor_msgs/Image shoulderImage
 sensor_msgs/Image gripperImage
 PositionCommand a

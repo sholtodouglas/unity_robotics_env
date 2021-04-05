@@ -6,7 +6,7 @@ os.sys.path.insert(0, currentdir)
 
 import random
 import rospy
-from robotics_demo.msg import PositionCommand, JointPositions
+from robotics_demo.msg import PositionCommand, JointPositions, RPYState
 from shadow_arm import InverseKinematicsSolver
 import numpy as np
 import time
@@ -39,10 +39,15 @@ def convert2jointCommand(p_cmd):
     cmd = JointPositions(j_angs[0],j_angs[1], j_angs[2], j_angs[3], j_angs[4], j_angs[5], gripper, time.time())
     pub.publish(cmd)
     time_of_last_solve = time.time() # reset the timer since last solve
+
+
+def reset(r):
+    IKSolver.reset()
    
 def listener():
     rospy.init_node('xyz_rpy_g_to_joints', anonymous=True)
     rospy.Subscriber("xyz_rpy_g_command", PositionCommand, convert2jointCommand)
+    rospy.Subscriber("reset", RPYState, reset) # state is the commanded info
     rospy.spin()
 
 if __name__ == "__main__":
