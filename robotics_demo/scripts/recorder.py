@@ -32,7 +32,7 @@ acts_array = []
 ag_array = []
 times_array = []
 
-
+last_tstep_received = 0
 
 def save_timestep(timestep: ToRecord):
     '''
@@ -64,13 +64,13 @@ def save_timestep(timestep: ToRecord):
 
 def start_recording(b: Bool):
     global RECORDING, stepCount
+    update_filepaths()
     RECORDING = True
     stepCount = 0
-    update_filepaths()
     print(f"Started recording at {npz_path}")
 
 def save_trajectory(x: RPYState):
-    global obs_array, acts_array, ag_array, times_array
+    global RECORDING, obs_array, acts_array, ag_array, times_array
     if RECORDING:
         np.savez(npz_path + '/data', acts=acts_array, obs=obs_array, achieved_goals=ag_array, times=times_array, allow_pickle=True)
         obs_array, acts_array, ag_array, times_array = [], [], [], []
@@ -92,6 +92,7 @@ def update_filepaths():
 
 
 def listener():
+    global RECORDING
 
     try:
         os.makedirs(env_state_path)
@@ -102,13 +103,17 @@ def listener():
     except:
         pass
 
-    update_filepaths()
-    
     rospy.init_node('conslidate_state')
     rospy.Subscriber("timestep", ToRecord, save_timestep)
     rospy.Subscriber("start_recording", Bool, start_recording) # state is the commanded info
     rospy.Subscriber("reset", RPYState, save_trajectory) # state is the commanded info
-    rospy.spin()
+    while not rospy.is_shutdown():
+        t = time.time()
+        if t > last_tstep_received + 2 and RECORDING and len(obs_array) > 0:
+            #if we are mid recording, but it has been a while since the last timestep - cut off the 
+            # trajectory, stop recording until instructed to do so
+            save_trajectory(RPYState())
+            RECORDING = False
 
 
 if __name__ == "__main__":
