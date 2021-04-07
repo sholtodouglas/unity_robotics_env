@@ -127,7 +127,7 @@ def register_vr_controller(cmd: QuaternionProprioState):
     global vr_controller_pos, last_vr_controller_time
     x,y,z,q1,q2,q3,q4,gripper = cmd.pos_x, cmd.pos_y, cmd.pos_z, cmd.q1, cmd.q2, cmd.q3, cmd.q4, cmd.gripper
     rpy = pybullet.getEulerFromQuaternion([-q2, -q1, q4, q3]) # yay for beautiful conversion between axis
-    print(x,y,z, rpy)
+    #print(x,y,z, rpy)
     vr_controller_pos = PositionCommand(x,y,z,rpy[0], rpy[1], rpy[2], gripper)
     last_vr_controller_time = time.time()
 
@@ -145,7 +145,7 @@ def process_observation(o: Observation):
     gripper_image = rosImg_to_numpy(ros_gripper_image)
 
     proprioceptive_state  = proprio_quat_to_rpy_vector(o.proprio)
-    # print(f"State: {proprioceptive_state}")
+    print(f"State: {proprioceptive_state}")
     achieved_goal = ag_to_vector(o.ag)
     full_state = np.concatenate([proprioceptive_state, achieved_goal])
     last_state_processed_time = time.time()

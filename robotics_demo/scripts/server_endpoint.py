@@ -3,11 +3,11 @@
 
 import rospy
 
-from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService
-from robotics_demo.msg import JointPositions, PositionCommand, QuaternionProprioState, Observation, Goal, RPYState, AchievedGoal
+from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService, UnityService
+from robotics_demo.msg import JointPositions, PositionCommand, QuaternionProprioState, Observation, Goal, RPYState, ResetInfo, Reengage
 from sensor_msgs.msg import Image
 from std_msgs.msg import Bool
-# from robotics_demo.srv import findIK
+from robotics_demo.srv import getState
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
@@ -34,8 +34,13 @@ def main():
         'set_goal': RosSubscriber('set_goal', Goal, tcp_server),
         # Get the 'reset' command from the controller
         'reset': RosPublisher('reset', RPYState, queue_size=1),
+        'start_recording': RosPublisher('start_recording', Bool, queue_size=1),
         # Allows us to push environment updates to the robot
-        'reset_environment': RosSubscriber('reset_environment', AchievedGoal, tcp_server),
+        'full_reset': RosSubscriber('full_reset', ResetInfo, tcp_server),
+        're_engage_physics': RosSubscriber("re_engage_physics", Reengage, tcp_server),
+        're_engage_collision': RosSubscriber("re_engage_collision", Reengage, tcp_server),
+
+        'getState': UnityService('getState', getState, tcp_server)
         #'imageTest': RosPublisher('imageTest', ImageTest, queue_size=1),
         # getting the exact joint angles is highly fraught (clearly unity immature for robotics), so would rather get exact pose and return required IK
         # which is much more accurate

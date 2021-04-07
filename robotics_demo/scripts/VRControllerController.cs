@@ -317,7 +317,7 @@ public class VRControllerController: MonoBehaviour
         uint imageHeight = (uint)renderTexture.height;
         uint imageWidth = (uint)renderTexture.width;
         RosMessageTypes.Sensor.Image rosImage = new RosMessageTypes.Sensor.Image(new RosMessageTypes.Std.Header(), imageWidth, imageHeight, "RGBA", isBigEndian, step, imageBytes);
-        shoulderCam.targetTexture = null;
+        cam.targetTexture = null;
 
         return rosImage;
 
@@ -364,8 +364,9 @@ public class VRControllerController: MonoBehaviour
     
         {
              // camera stuff
-            RosMessageTypes.Sensor.Image shoulderImage = takeImage(shoulderRenderTexture, shoulderCam);
             RosMessageTypes.Sensor.Image gripperImage = takeImage(gripperRenderTexture, gripperCam);
+            RosMessageTypes.Sensor.Image shoulderImage = takeImage(shoulderRenderTexture, shoulderCam);
+            
             
             Observation state = new Observation(
                 GetQuaternionProprioState(),

@@ -4,7 +4,35 @@ ROS_TCP_PORT: 10000
 # Set up a docker container with ports 10000 and 5005, and mount your current directory as the unity robotics
 # env. This assumes we are in the git repo base folder
 cd Desktop/unity_robotics_env
-docker run -it  -p 10000:10000 -p 5005:5005 -v %cd%:/catkin_ws/src/unity_robotics_env robotics
+docker run -it  -p 10000:10000 -p 5005:5005 -p 8888:8888 -v %cd%:/catkin_ws/src/unity_robotics_env robotics
+
+## Run this
+tmuxinator start -p catkin_ws/src/unity_robotics_env/mission_control.yml
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 # Make and source the env
 tmux
 cd catkin_ws
@@ -31,10 +59,10 @@ rosrun robotics_demo timer_loop.py
 source /catkin_ws/devel/setup.bash
 rosrun robotics_demo recorder.py
 
-
+python3 /catkin_ws/src/unity_robotics_env/robotics_demo/scripts/server_endpoint.py
 <!-- source /catkin_ws/devel/setup.bash
 rosrun robotics_demo color_publisher.py -->
-
+jupyter notebook --allow-root --ip=172.17.0.2 --port=8888 --no-browser
 
 # Unity 
 ROS IP Address - 127.0.0.1
@@ -94,3 +122,12 @@ List of Todos!
 
 
 # (-0.8920287033165873, -0.22291259615495435, -1.910235427964787, -1.0097142591695119, 0.6779716923126915, 0.000988316049301452)23
+
+
+
+
+
+tmuxinator
+
+export EDITOR='/usr/bin/nano'
+export SHELL='/bin/bash'

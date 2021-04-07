@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 
-
+#!/usr/bin/env python
 
 import random
 import rospy
@@ -24,8 +24,7 @@ def listener():
     while not rospy.is_shutdown():
         t = time.time()
         if t >= next_time:
-            # When we hit 25Hz (or whatever), send out a request for an obs, which trigger corelogic sending an act back
-            
+            # Triggers corelogic acting
             try:
                 next_time = next_time + 1/CONTROL_FREQUENCY
                 print(timestep, t)

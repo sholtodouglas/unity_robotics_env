@@ -1,0 +1,3 @@
+JointPositions joints
+AchievedGoal ag
+Velocities vels

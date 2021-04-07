@@ -1,10 +1,11 @@
 import rospy
 from sensor_msgs.msg import Image as ImageMsg
 from robotics_demo.msg import Observation, ToRecord, QuaternionProprioState, PositionCommand, Goal, TimerBeat,\
-     RPYProprioState, AchievedGoal
+     RPYProprioState, AchievedGoal, JointPositions
 from PIL import Image, ImageOps
 import numpy as np
 import pybullet
+import time
 
 def rosImg_to_numpy(img: ImageMsg):
     image_height = img.width
@@ -30,6 +31,9 @@ def ag_to_vector(o: AchievedGoal):
 
 def ag_to_ROSmsg(o: np.ndarray):
     return AchievedGoal(o[0],o[1], o[2], o[3], o[4], o[5], o[6])
+
+def act_to_jointPositionsROSmsg(j: np.ndarray):
+    return JointPositions(j[0], j[1], j[2], j[3], j[4], j[5], j[6], time.time())
 
 def unstack(a, axis = 0):
     return [np.take(a, i, axis = axis) for i in range(a.shape[axis])]

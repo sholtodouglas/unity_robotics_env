@@ -1,0 +1,4 @@
+RPYProprioState RPYPos
+JointPositions prev_joints
+---
+JointPositions joints

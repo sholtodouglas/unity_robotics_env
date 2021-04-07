@@ -1,4 +1,4 @@
-
+#!/usr/bin/env python
 import pybullet as p
 import numpy as np
 import os, inspect
