@@ -6,7 +6,6 @@ import random
 import rospy
 from robotics_demo.msg import Observation, ToRecord, QuaternionProprioState, PositionCommand, Goal, TimerBeat, RPYProprioState, \
                                 AchievedGoal, RPYState, ReplayInfo
-from robotics_demo.srv import getState, getStateResponse
 from sensor_msgs.msg import Image as ImageMsg
 from std_msgs.msg import String, Bool
 import pybullet
@@ -40,7 +39,6 @@ ros_gripper_image = None
 proprioceptive_state = None
 achieved_goal = None
 full_state = None
-velocity = None
 last_state_arrival_time = 0
 last_state_processed_time = 0  # unless updated then the if check will fail because 0 is too long ago
 last_vr_controller_time = 0
@@ -52,7 +50,6 @@ transition_pub = rospy.Publisher('timestep', ToRecord, queue_size=1)
 # The publisher which resets the non_arm elements of the state
 env_reset_pub = rospy.Publisher('reset_environment', AchievedGoal, queue_size=1)
 
-getStateServ = rospy.ServiceProxy('getState', getState)
 # resetting flag
 resetting = False
 # buffer of acts to replay from - if this is full, pop them off one by one!
@@ -134,49 +131,21 @@ def register_vr_controller(cmd: QuaternionProprioState):
     vr_controller_pos = PositionCommand(x,y,z,rpy[0], rpy[1], rpy[2], gripper)
     last_vr_controller_time = time.time()
 
-# def process_observation(o: Observation):
-#     '''
-#     The full state will be sent out at Nh > controlHz by the env, listen to it, and save the relevant parts
-#     '''
-#     global shoulder_image, gripper_image, proprioceptive_state, \
-#             achieved_goal, full_state, last_state_arrival_time, last_state_processed_time, ros_shoulder_image, ros_gripper_image
-#     last_state_arrival_time = time.time()
-    
-#     ros_shoulder_image = o.shoulderImage
-#     shoulder_image  = rosImg_to_numpy(ros_shoulder_image)
-#     ros_gripper_image = o.gripperImage
-#     gripper_image = rosImg_to_numpy(ros_gripper_image)
-
-#     proprioceptive_state  = proprio_quat_to_rpy_vector(o.proprio)
-#     print(f"State: {proprioceptive_state}")
-#     achieved_goal = ag_to_vector(o.ag)
-#     full_state = np.concatenate([proprioceptive_state, achieved_goal])
-#     last_state_processed_time = time.time()
-
-def process_observation():
+def process_observation(o: Observation):
     '''
     The full state will be sent out at Nh > controlHz by the env, listen to it, and save the relevant parts
     '''
-
     global shoulder_image, gripper_image, proprioceptive_state, \
-            achieved_goal, full_state, last_state_arrival_time, last_state_processed_time, \
-            ros_shoulder_image, ros_gripper_image, velocity
-
-
-    try:
-        o = getStateServ(int(1)).state
-    except:
-        print("Get state failed, is the env initialised?")
-        return 
-        
+            achieved_goal, full_state, last_state_arrival_time, last_state_processed_time, ros_shoulder_image, ros_gripper_image
     last_state_arrival_time = time.time()
+    
     ros_shoulder_image = o.shoulderImage
     shoulder_image  = rosImg_to_numpy(ros_shoulder_image)
     ros_gripper_image = o.gripperImage
     gripper_image = rosImg_to_numpy(ros_gripper_image)
-    velocity = o.vels
+
     proprioceptive_state  = proprio_quat_to_rpy_vector(o.proprio)
-    print(f"State: {proprioceptive_state}")
+    # print(f"State: {proprioceptive_state}")
     achieved_goal = ag_to_vector(o.ag)
     full_state = np.concatenate([proprioceptive_state, achieved_goal])
     last_state_processed_time = time.time()
@@ -189,12 +158,10 @@ def act(b: TimerBeat):
     a) an xyzrpygripper act on topic 'xyz_rpy_g_command', which gets converted to joint angles by 'xyz_rpy_g_to_joints.py'
     b) a combined state + act on topic 'transition', for the recorder to record
     '''
-    global  g,z, vr_controller_pos, shoulder_image, gripper_image, proprioceptive_state, full_state, velocity
+    global  g,z, vr_controller_pos, shoulder_image, gripper_image, proprioceptive_state, full_state
 
     #print([x,y,z])
     #print(pybullet.getEulerFromQuaternion([-q2, -q1, q4, q3])) # at rest, should be 0,0,0
-
-    process_observation()
 
     act_begin_time = time.time()
 
@@ -230,7 +197,7 @@ def act(b: TimerBeat):
         proprio = proprio_rpy_to_ROSmsg(proprioceptive_state)
         ag = ag_to_ROSmsg(achieved_goal)
         state = RPYState(proprio, ag)
-        timestep = ToRecord(state, velocity, ros_shoulder_image, ros_gripper_image, a, b.timestep,\
+        timestep = ToRecord(state, ros_shoulder_image, ros_gripper_image, a, b.timestep,\
             last_state_arrival_time, last_state_processed_time,  b.time, act_begin_time, model_processed_time)
         # # and publish this for the saver to record
         transition_pub.publish(timestep) 
@@ -240,7 +207,7 @@ def act(b: TimerBeat):
 def listener():
     rospy.init_node('core_logic')
     # Listens for states, sends out an xyzrpy action in response
-    #rospy.Subscriber("state", Observation, process_observation)
+    rospy.Subscriber("state", Observation, process_observation)
     rospy.Subscriber("beat", TimerBeat, act)
     # Listens for the VR controller pos, updates the variable to store it
     rospy.Subscriber("xyz_quat_g_command", QuaternionProprioState, register_vr_controller)
