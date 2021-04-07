@@ -39,6 +39,7 @@ ros_gripper_image = None
 proprioceptive_state = None
 achieved_goal = None
 full_state = None
+velocities = None
 last_state_arrival_time = 0
 last_state_processed_time = 0  # unless updated then the if check will fail because 0 is too long ago
 last_vr_controller_time = 0
@@ -136,7 +137,8 @@ def process_observation(o: Observation):
     The full state will be sent out at Nh > controlHz by the env, listen to it, and save the relevant parts
     '''
     global shoulder_image, gripper_image, proprioceptive_state, \
-            achieved_goal, full_state, last_state_arrival_time, last_state_processed_time, ros_shoulder_image, ros_gripper_image
+            achieved_goal, full_state, last_state_arrival_time, \
+            last_state_processed_time, ros_shoulder_image, ros_gripper_image, velocities
     last_state_arrival_time = time.time()
     
     ros_shoulder_image = o.shoulderImage
@@ -147,6 +149,7 @@ def process_observation(o: Observation):
     proprioceptive_state  = proprio_quat_to_rpy_vector(o.proprio)
     # print(f"State: {proprioceptive_state}")
     achieved_goal = ag_to_vector(o.ag)
+    velocities = o.vels
     full_state = np.concatenate([proprioceptive_state, achieved_goal])
     last_state_processed_time = time.time()
 
@@ -158,7 +161,7 @@ def act(b: TimerBeat):
     a) an xyzrpygripper act on topic 'xyz_rpy_g_command', which gets converted to joint angles by 'xyz_rpy_g_to_joints.py'
     b) a combined state + act on topic 'transition', for the recorder to record
     '''
-    global  g,z, vr_controller_pos, shoulder_image, gripper_image, proprioceptive_state, full_state
+    global  g,z, vr_controller_pos, shoulder_image, gripper_image, proprioceptive_state, full_state, velocities
 
     #print([x,y,z])
     #print(pybullet.getEulerFromQuaternion([-q2, -q1, q4, q3])) # at rest, should be 0,0,0
@@ -197,7 +200,7 @@ def act(b: TimerBeat):
         proprio = proprio_rpy_to_ROSmsg(proprioceptive_state)
         ag = ag_to_ROSmsg(achieved_goal)
         state = RPYState(proprio, ag)
-        timestep = ToRecord(state, ros_shoulder_image, ros_gripper_image, a, b.timestep,\
+        timestep = ToRecord(state, velocities, ros_shoulder_image, ros_gripper_image, a, b.timestep,\
             last_state_arrival_time, last_state_processed_time,  b.time, act_begin_time, model_processed_time)
         # # and publish this for the saver to record
         transition_pub.publish(timestep) 
