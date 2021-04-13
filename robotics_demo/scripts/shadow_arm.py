@@ -33,6 +33,8 @@ class InverseKinematicsSolver():
         self.default_joints = default_joints
         self.ee_index=ee_index
         self.set_states(self.default_joints)
+        self.ll = np.array([-np.pi, (-np.pi/2)*0.9, -np.pi, -np.pi, -np.pi, -np.pi])
+        self.ul = np.array([np.pi, np.pi, 0.0, np.pi, np.pi, np.pi])
 
     # sets the arm to the current joint positions so IK calcs are accurate
     def set_states(self,states):
@@ -53,12 +55,13 @@ class InverseKinematicsSolver():
         # else:
         #     self.set_states(current_states)
         for i in range(0,3): # converge on the solution
-            angles = [0]+list(self.p.calculateInverseKinematics(self.ur5,self.ee_index, pos,ori))
+            angles = [0]+list(np.clip(self.p.calculateInverseKinematics(self.ur5,self.ee_index, pos,ori), self.ll, self.ul))
             #print(np.array(angles)*180/np.pi)
             #
+            
             self.set_states(angles)
         
-        return self.p.calculateInverseKinematics(self.ur5,self.ee_index, pos,ori)[0:7]
+        return np.clip(self.p.calculateInverseKinematics(self.ur5,self.ee_index, pos,ori), self.ll, self.ul)[0:7]
 
 
     def reset(self):
@@ -71,7 +74,7 @@ class InverseKinematicsSolver():
 if __name__ == "__main__":
     robot = InverseKinematicsSolver(connection_mode=p.GUI)
     import time
-    time.sleep(5)
+    
     def add_xyz_rpy_controls():
         controls = []
         controls.append(p.addUserDebugParameter("X", -1, 1, 0.4))

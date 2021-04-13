@@ -6,13 +6,13 @@ import rospy
 from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService, UnityService
 from robotics_demo.msg import JointPositions, PositionCommand, QuaternionProprioState, Observation, Goal, RPYState, ResetInfo, Reengage
 from sensor_msgs.msg import Image
-from std_msgs.msg import Bool
+from std_msgs.msg import Bool, String
 from robotics_demo.srv import getState
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
     buffer_size = rospy.get_param("/TCP_BUFFER_SIZE", 30000)
-    connections = rospy.get_param("/TCP_CONNECTIONS", 20)
+    connections = rospy.get_param("/TCP_CONNECTIONS", 30)
     tcp_server = TcpServer(ros_node_name, buffer_size, connections)
     rospy.init_node(ros_node_name, anonymous=True)
     # Fix the subscribe thigns
@@ -39,6 +39,7 @@ def main():
         'full_reset': RosSubscriber('full_reset', ResetInfo, tcp_server),
         're_engage_physics': RosSubscriber("re_engage_physics", Reengage, tcp_server),
         're_engage_collision': RosSubscriber("re_engage_collision", Reengage, tcp_server),
+        'saving_status': RosSubscriber("saving_status", String, tcp_server),
 
         'getState': UnityService('getState', getState, tcp_server)
         #'imageTest': RosPublisher('imageTest', ImageTest, queue_size=1),

@@ -17,16 +17,19 @@ os.sys.path.insert(0, currentdir)
 from utils import rosImg_to_numpy, proprio_quat_to_rpy_vector, proprio_rpy_to_ROSmsg, ag_to_vector, ag_to_ROSmsg, proprio_rpy_to_rpy_vector, unstack
 import np_to_multiarray
 import time 
+import copy
 
 np.set_printoptions(suppress=True)
 PACKAGE_LOCATION = os.path.dirname(os.path.realpath(__file__))[:-(len("/scripts"))] # remove "/scripts"
 
 # This variable indicates whether it is being controlled by the env, e.g. through sliders or vr controller
 ENV_CONTROLLED = True # It is default false, but set true by the environment on startup
+AVG_MODEL_PROCESSING_TIME = 0.033
 
 # Stores the latest quaternion command from the VR controller, if active
 vr_controller_pos = PositionCommand(-0.4, 0.2, 0.0,0.0,0.0,0.0,0.0)
 default_vr_controller_pos =  PositionCommand(-0.4, 0.2, 0.0,0.0,0.0,0.0,0.0)
+a_vector = None
 # LMP stuff
 g = None # [1, GOAL_DIM] either state size or img embedding size
 replan_horizon = 15
@@ -55,6 +58,7 @@ env_reset_pub = rospy.Publisher('reset_environment', AchievedGoal, queue_size=1)
 resetting = False
 # buffer of acts to replay from - if this is full, pop them off one by one!
 replay_acts = []
+act_clip = np.array([0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.5])
 
 def check_reset_convergence(proprio, ag, threshold = 0.05):
     global proprioceptive_state, achieved_goal
@@ -125,11 +129,12 @@ def register_vr_controller(cmd: QuaternionProprioState):
     Whenever the VR controller updates, this updates 'vr_controller_pos' so that act can send that as the action
     instead of model outputs if a VR controller is plugged in 
     '''
-    global vr_controller_pos, last_vr_controller_time
+    global vr_controller_pos, last_vr_controller_time, a_vector # a is the last sent out action
     x,y,z,q1,q2,q3,q4,gripper = cmd.pos_x, cmd.pos_y, cmd.pos_z, cmd.q1, cmd.q2, cmd.q3, cmd.q4, cmd.gripper
     rpy = pybullet.getEulerFromQuaternion([-q2, -q1, q4, q3]) # yay for beautiful conversion between axis
     #print(x,y,z, rpy)
-    vr_controller_pos = PositionCommand(x,y,z,rpy[0], rpy[1], rpy[2], gripper)
+    a = np.array([x,y,z, rpy[0], rpy[1], rpy[2], gripper])
+    vr_controller_pos = PositionCommand(a[0],a[1],a[2],a[3], a[4], a[5], a[6])
     last_vr_controller_time = time.time()
 
 def process_observation(o: Observation):
@@ -161,12 +166,14 @@ def act(b: TimerBeat):
     a) an xyzrpygripper act on topic 'xyz_rpy_g_command', which gets converted to joint angles by 'xyz_rpy_g_to_joints.py'
     b) a combined state + act on topic 'transition', for the recorder to record
     '''
-    global  g,z, vr_controller_pos, shoulder_image, gripper_image, proprioceptive_state, full_state, velocities
+    global  g,z, vr_controller_pos, shoulder_image, gripper_image, proprioceptive_state, full_state, velocities, a_vector, mid_act
 
     #print([x,y,z])
     #print(pybullet.getEulerFromQuaternion([-q2, -q1, q4, q3])) # at rest, should be 0,0,0
 
     act_begin_time = time.time()
+    # copy local version because ROS likes to update them mid-act if it has the capacity to do so
+    
 
     if act_begin_time-last_state_processed_time > 0.5:
         print("No recent env information - check connection")
@@ -175,6 +182,9 @@ def act(b: TimerBeat):
         #print("Resetting - no action take")
         return
     else:
+        proprioceptive_state_cp, achieved_goal_cp, velocities_cp, ros_shoulder_image_cp, \
+        ros_gripper_image_cp,  last_state_arrival_time_cp, last_state_processed_time_cp = copy.deepcopy(proprioceptive_state), copy.deepcopy(achieved_goal), copy.deepcopy(velocities), copy.deepcopy(ros_shoulder_image), \
+                                                                                    copy.deepcopy(ros_gripper_image),  copy.deepcopy(last_state_arrival_time), copy.deepcopy(last_state_processed_time)
         
         #### Put these into the model ####
         # if o.timestep % replan_horizon == 0:
@@ -182,28 +192,38 @@ def act(b: TimerBeat):
         #     z = planner((obs, g))
         # a = model((obs, z, g))
         # a = PositionCommand(a[0], a[1], a[2], a[3], a[4], a[5], a[6], a[7])
-        model_processed_time = time.time()
+        
 
         # Publish the action for the environment to take
         if ENV_CONTROLLED:
+            t_s = time.time() + AVG_MODEL_PROCESSING_TIME
+            while(time.time() < t_s):
+                pass
             if time.time() > last_vr_controller_time + 2:
                 a = default_vr_controller_pos
-                
             else:
                 a = vr_controller_pos
+                a = proprio_rpy_to_rpy_vector(a)
+                    # clip action according to the vectorised version of the prev action commanded so we don't have super jumpy motions
+                # if a_vector is not None:
+                #     a = np.clip(a,a_vector - act_clip, a_vector + act_clip)
+                a = PositionCommand(a[0],a[1],a[2],a[3], a[4], a[5], a[6])
         elif len(replay_acts) > 0: # if there are acts to replay, pop them off instead of taking our own
             a = replay_acts.pop()
-        
+            
+        model_processed_time = time.time()
         pos_cmd_pub.publish(a)
 
         # Consolidate o and a, include when it arrived, and how long model processing took, o has the initial request time
-        proprio = proprio_rpy_to_ROSmsg(proprioceptive_state)
-        ag = ag_to_ROSmsg(achieved_goal)
+        proprio = proprio_rpy_to_ROSmsg(proprioceptive_state_cp)
+        ag = ag_to_ROSmsg(achieved_goal_cp)
         state = RPYState(proprio, ag)
-        timestep = ToRecord(state, velocities, ros_shoulder_image, ros_gripper_image, a, b.timestep,\
-            last_state_arrival_time, last_state_processed_time,  b.time, act_begin_time, model_processed_time)
+        timestep = ToRecord(state, velocities, ros_shoulder_image_cp, ros_gripper_image_cp, a, b.timestep,\
+            last_state_arrival_time_cp, last_state_processed_time_cp,  b.time, act_begin_time, model_processed_time)
         # # and publish this for the saver to record
-        transition_pub.publish(timestep) 
+        transition_pub.publish(timestep)
+        a_vector =  proprio_rpy_to_rpy_vector(a)
+        
 
 
 

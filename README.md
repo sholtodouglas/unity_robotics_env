@@ -7,17 +7,19 @@ cd Desktop/unity_robotics_env
 docker run -it  -p 10000:10000 -p 5005:5005 -p 8888:8888 -v %cd%:/catkin_ws/src/unity_robotics_env robotics
 
 ## Run this
+source /opt/ros/noetic/setup.bash
 tmuxinator start -p catkin_ws/src/unity_robotics_env/mission_control.yml
 
 
+## To access the jupyter notebook ( and enter the token if necessary)
+http://127.0.0.1:8888
 
 
 
 
+tmux kill-session -t mission_control
 
-
-
-
+cp -r /catkin_ws/src/data/UR5 /catkin_ws/src/unity_robotics_env/data/UR5
 
 
 
@@ -128,6 +130,14 @@ List of Todos!
 
 
 tmuxinator
+tqdm
+ros noetic
 
 export EDITOR='/usr/bin/nano'
 export SHELL='/bin/bash'
+
+make sure doors are not collison matrix approved with their base
+
+
+# Unity tips n tricks
+- Make use of layers, avoid collision with things that don't need to (a door and its cupboard), hide the controllers from view etc

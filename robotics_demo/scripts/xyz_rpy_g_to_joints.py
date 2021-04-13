@@ -56,13 +56,20 @@ def IK_Service(req):
     Sometimes we want to get the angles for our own use, rather than broadcasting
     Specifically - when resetting
     '''
+    global time_of_last_solve
+    global IKSolver
+    if time.time() > time_of_last_solve + 3: # If we haven't solved in 3s, likely the env has been reset - reset the arm too!
+        IKSolver = InverseKinematicsSolver()
+
     prev = req.prev_joints # the actually commanded joint angles, so we can reset the IK init close to them
     poses = np.array([0.0, prev.shoulder, prev.upper_arm, prev.forearm, prev.wrist_1, prev.wrist_2, prev.wrist_3, 0.0])
     if (poses != 0).any():
-        # Then we have actually set desired prev angles
+        # Then we have actually set desired prev angles TODO: For some reason this hurts rather than helps?
         IKSolver.set_states(poses / (180/np.pi) )
+        j = IK(req.RPYPos) # call it once here for convergence
     # else Its generic, don't reset to these
-    j = IK(req.RPYPos)
+    j = IK(req.RPYPos) # call it here to get the real answer
+    time_of_last_solve = time.time() # reset the timer since last solve
     return getIKResponse(j)
 
 
