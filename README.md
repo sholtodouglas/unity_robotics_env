@@ -24,7 +24,7 @@ tmuxinator start -p catkin_ws/src/robotics/unity_robotics_env/mission_control.ym
 http://127.0.0.1:8888
 
 
-
+See /robotics_demo/scripts/ControlCentre.ipynb for an example of how to reset the env and command the arm. 
 
 
 
