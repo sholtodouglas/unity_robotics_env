@@ -1,2 +1,9 @@
 /robotics_demo/data/*
 /data/*
+.ipynb_checkpoints
+.idea
+.vscode
+__pycache__
+config.py
+/.idea/*
+/__pycache__/*
