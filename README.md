@@ -1,10 +1,25 @@
+# Setting up this environment to work with learning from play
+There are three steps
+ - Download the repo for this env. As packages, install the https://github.com/Unity-Technologies/ROS-TCP-Connector (use dev branch, or the files provided) and https://github.com/Unity-Technologies/URDF-Importer (only needed if you want to change the arm). This includes the interfacing code. 
+ - Download the docker image sholto/robotics
+ - Download the lfp library
+ - Optional - download the test set https://drive.google.com/drive/folders/10jdoW8XLX7zJlKsVD5fKg8NFZfjbUn8w?usp=sharing, you only need the TFrecords, but that is the directory structure.
+
+
+ # Running everything
+ - 
+
+
+
+
+
 # unity_robotics_env
 ROS_IP: 172.17.0.2
 ROS_TCP_PORT: 10000
 # Set up a docker container with ports 10000 and 5005, and mount your current directory as the unity robotics
 # env. This assumes we are in the git repo base folder
 cd Desktop/robotics
-docker run -it --gpus=all --env NVIDIA_DISABLE_REQUIRE=1 -e TZ=Australia/Sydney -p 10000:10000 -p 5005:5005 -p 8888:8888 -v %cd%:/catkin_ws/src/robotics robotics 
+docker run -it --gpus=all --env NVIDIA_DISABLE_REQUIRE=1 -e TZ=Australia/Sydney -p 10000:10000 -p 5005:5005 -p 8888:8888 -v %cd%:/catkin_ws/src/robotics sholto/robotics 
 
 ## Run this
 source /opt/ros/noetic/setup.bash
@@ -169,3 +184,4 @@ export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64:/usr/local/cuda-11.2/lib64
 
 
 gsutil -m cp "gs://lfp_europe_west4_a/saved_models/UnityB0_00/checkpoint" "gs://lfp_europe_west4_a/saved_models/UnityB0_00/ckpt-20.data-00000-of-00001" "gs://lfp_europe_west4_a/saved_models/UnityB0_00/ckpt-20.index" .
+
