@@ -6,7 +6,7 @@
     "com.unity.ide.vscode": "1.2.3",
     "com.unity.recorder": "2.5.4",
     "com.unity.render-pipelines.universal": "10.3.2",
-    "com.unity.robotics.ros-tcp-connector": "file:C:/Users/sholt/Desktop/ROS-TCP-Connector/com.unity.robotics.ros-tcp-connector",
+    "com.unity.robotics.ros-tcp-connector": "file:../Assets/ROS-TCP-Connector/com.unity.robotics.ros-tcp-connector",
     "com.unity.robotics.urdf-importer": "https://github.com/Unity-Technologies/URDF-Importer.git#v0.1.2",
     "com.unity.test-framework": "1.1.20",
     "com.unity.textmeshpro": "3.0.1",

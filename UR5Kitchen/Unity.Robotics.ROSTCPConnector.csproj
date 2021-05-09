@@ -9,10 +9,10 @@
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
     <RootNamespace></RootNamespace>
-    <ProjectGuid>{5685e2a0-8003-f8dc-6420-57f26819e66a}</ProjectGuid>
+    <ProjectGuid>{cec2b9dc-7eb6-d400-cc47-9df286d62ec6}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <AssemblyName>Assembly-CSharp</AssemblyName>
+    <AssemblyName>Unity.Robotics.ROSTCPConnector</AssemblyName>
     <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <BaseDirectory>.</BaseDirectory>
@@ -36,259 +36,190 @@
     <ImplicitlyExpandDesignTimeFacades>false</ImplicitlyExpandDesignTimeFacades>
   </PropertyGroup>
   <ItemGroup>
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportOrientationHandlerHMD.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportAimHandlerParabolic.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\OculusSpatializerUnity.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\HandsActiveChecker.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\srv\MgetIKResponse.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSkinnedMeshRenderPBSV2Component.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MToRecord.cs" />
-     <Compile Include="Assets\CompoundColliderGenerator\ProceduralToolkit\MeshDraftPrimitives.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager_Sound.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSettings.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\GazeTarget.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSkinnedMeshRenderComponent.cs" />
-     <Compile Include="Assets\CompoundColliderGenerator\ProceduralToolkit\PTUtils.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\CowController.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\SocialStarter\Assets\Scripts\RoomManager.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\CustomHands\Scripts\HandPose.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\Tools\InteractableTool.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MScalarRecording.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\SoundFXRef.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Video\Plugins\Android\NativeVideoPlayer.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scenes\Scripts\LipSyncDemo_Control.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\SoundFX.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportAimVisualLaser.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationGeometry.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Video\Scripts\MoviePlayerSample.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportDestination.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\TrainButtonVisualController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\SimpleCapsuleWithStickMovement.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scenes\Scripts\LipSyncDemo_SetCurrentTarget.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\InteractableRegistry.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DebugUI\Scripts\HandedInputSelector.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DistanceGrab\Scripts\DistanceGrabbable.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\Utils\Pose.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncSequence.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportInputHandlerHMD.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportInputHandler.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DistanceGrab\Scripts\GrabManager.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\CharacterCameraConstraint.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\LocalAvatar\Scripts\GazeTargetSpawner.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTransitionWarp.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Video\Scripts\VectorUtil.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarAsset.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MAchievedGoal.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\SocialStarter\Assets\Scripts\SocialPlatformManager.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DistanceGrab\Scripts\PauseOnInputLoss.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\InteractableToolsCreator.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationMaterial.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\SocialStarter\Assets\Scripts\P2PManager.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DebugUI\Scripts\DebugUIBuilder.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MVelocities.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MTimerBeat.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportSupport.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\ButtonController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\CustomHands\Scripts\Hand.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\Helpers\OVRNamedArrayAttribute.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportOrientationHandler.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\RemoteLoopback\Scripts\RemoteLoopbackManager.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\Locomotion\Scripts\LocomotionSampleSupport.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationSettings.cs" />
-     <Compile Include="Assets\scripts\VRControllerController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\Locomotion\Scripts\CharacterCapsule.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\LocomotionController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTargetHandlerPhysical.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DistanceGrab\Scripts\DistanceGrabber.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\helpers\ONSPReflectionZone.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarLocalDriver.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\TrainTrack.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarBase.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPProfiler.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarAssetTexture.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\Interactable.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextMorphTarget.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\TouchControllers\TouchController.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scenes\Scripts\TestScript.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\TrainCar.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportPoint.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\Tools\FingerTipPokeTool.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\GripPoses\Scripts\PoseEditHelper.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextTextureFlip.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MPositionCommand.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTargetHandlerNavMesh.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPSettings.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarTouchController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\ControllerBoxController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Video\Scripts\ButtonDownListener.cs" />
-     <Compile Include="Assets\CompoundColliderGenerator\ProceduralToolkit\MeshPrimitives.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportAimHandlerLaser.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\srv\MgetStateRequest.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\srv\MgetStateResponse.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AudioManager.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MReplayInfo.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatar.cs" />
-     <Compile Include="Assets\Oculus\OVRMetricsTool\Plugins\Android\OVRMetricsToolSDK.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarMaterialManager.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\ColliderZone.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Video\Scripts\MoviePlayerSampleControls.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPAudioSource.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\WindmillController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DebugUI\Scripts\LaserPointer.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTransition.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSDKCAPI.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\SelectionCylinder.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\PanelHMDFollower.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MRPYProprioState.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Utils\FastList.cs" />
-     <Compile Include="Assets\PhysicsButton.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSDKManager.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\DebugUI\DebugUISample.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncMicInput.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\ButtonTriggerZone.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\BoneCapsuleTriggerLogic.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MObservation.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scenes\Scripts\EnableSwitch.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DistanceGrab\Scripts\ColorGrabbable.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Video\Scripts\MediaPlayerImage.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\DistanceGrab\Scripts\DistanceGrabberSample.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MJointPositions.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\HandsManager.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSettingsEditor.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarPacket.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTargetHandlerNode.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MQuaternionProprioState.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\DistanceGrab\Scripts\GrabbableCrosshair.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarAssetMesh.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\TrainLocomotive.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarRenderComponent.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportOrientationHandlerThumbstick.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\TrainCrossingController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\StartScene\Scripts\StartMenu.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPVersion.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarBody.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTransitionBlink.cs" />
-     <Compile Include="Assets\DrawerController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\Tools\PinchStateModule.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarSkinnedMeshRenderPBSComponent.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextBase.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Utils\InspectorNoteAttribute.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarLogger.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\WindmillBladesController.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarRemoteDriver.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarHand.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportInputHandlerTouch.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSync.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\SocialStarter\Assets\Scripts\VoipManager.cs" />
-     <Compile Include="Assets\CompoundColliderGenerator\ProceduralToolkit\MeshE.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\MinMaxAttribute.cs" />
-     <Compile Include="Assets\DoorController.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\srv\MgetTimeResponse.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTransitionInstant.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\SocialStarter\Assets\Scripts\RemotePlayer.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\Tools\InteractableToolView.cs" />
-     <Compile Include="Assets\ColourChanger.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContext.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\InteractableToolsInputRouter.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPAmbisonicsNative.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MRPYState.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\AmbienceEmitter.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\srv\MgetTimeRequest.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\Helpers\OVRTouchpad.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\LocomotionTeleport.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\Helpers\OVRLipSyncDebugConsole.cs" />
-     <Compile Include="Assets\Oculus\AudioManager\Scripts\Audio\SoundEmitter.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MReengage.cs" />
-     <Compile Include="Assets\Oculus\LipSync\Scripts\OVRLipSyncContextCanned.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\OVROverlayCanvas\Scripts\OVROverlayCanvas.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportOrientationHandler360.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportAimHandler.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scripts\ONSPPropagationInterface.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\Tools\RayToolView.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\AvatarGallery\Scripts\OvrAvatarTestDriver.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarDriver.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\TrainCarBase.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarComponent.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\Tools\RayTool.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\srv\MgetIKRequest.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Scripts\Tools\FingerTipPokeToolView.cs" />
-     <Compile Include="Assets\Oculus\Spatializer\scenes\Standard Assets\Character Controllers\Sources\Scripts\MouseLook.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Scripts\OvrAvatarTextureCopyManager.cs" />
-     <Compile Include="Assets\CompoundColliderGenerator\ProceduralToolkit\MeshDraft.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\OVROverlay\Scripts\OVROverlaySample.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MGoal.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Core\Locomotion\Scripts\TeleportTargetHandler.cs" />
-     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MResetInfo.cs" />
-     <Compile Include="Assets\Oculus\Avatar\Samples\SocialStarter\Assets\Scripts\PlayerController.cs" />
-     <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\TrackSegment.cs" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\XingLightShader.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarMaterialStateShader.cginc" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\ButtonGlow.shader" />
-     <None Include="Assets\ROS-TCP-Connector\TestRosTcpConnector\ProjectSettings\ProjectVersion.txt" />
-     <None Include="Assets\URDF\ur5\robotiq_2f_85_gripper_visualization\package.xml" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\DistanceGrab\Materials\CrosshairZCheat.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\Version1.5\Avatar_Mobile_Loader.shader" />
-     <None Include="Assets\Complete_Home_Interior_Pack\README.txt" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\GradientSkybox.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\Version1.5\Avatar_Mobile_SingleComponent.shader" />
-     <None Include="Assets\Complete_Home_Interior_Pack\CHIP_Prefabs\PRE_Ceilings\HSHP_PRE_CEI_Ceiling_preview.txt" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShader.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\Expressive\AvatarEyeLens.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\Expressive\Avatar_PC_SingleComponentExpressive.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Mobile.cginc" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\OculusSampleTrainPropsShader.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\DistanceGrab\Materials\ToyCubeWithOutline.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Core\Locomotion\Materials\ColumnGlow.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
-     <None Include="Assets\URDF\ur5v2\robotiq_2f_85_gripper_visualization\package.xml" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\Expressive\Avatar_Mobile_CombinedMeshExpressive.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\Version1.5\Avatar_PC_SingleComponent.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShaderPBSV2.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\Version1.5\Avatar_Mobile_CombinedMesh.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Core\Video\Shaders\Multiview Stereo.shader" />
-     <None Include="Assets\URDF\ur5v2\robotiq_2f_85_gripper_visualization\CMakeLists.txt" />
-     <None Include="Assets\Oculus\SampleFramework\Core\DebugUI\Fonts\Montserrat\OFL.txt" />
-     <None Include="Assets\Oculus\Avatar\Samples\SocialStarter\README.txt" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\OVROverlayCanvas\Shaders\UI Default Correct.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Shaders\Hands_01.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarPBRV2Simple.shader" />
-     <None Include="Assets\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Properties.cginc" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShaderSelfOccluding.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMPro_Surface.cginc" />
-     <None Include="Assets\Oculus\SampleFramework\Core\HandsInteraction\Shaders\OculusSampleAlphaHandOutline.shader" />
-     <None Include="Assets\URDF\ur5\robotiq_2f_85_gripper_visualization\CMakeLists.txt" />
-     <None Include="Assets\TextMesh Pro\Resources\LineBreaking Following Characters.txt" />
-     <None Include="Assets\CompoundColliderGenerator\README.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\OculusSampleTrainSmokeShader.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\OVROverlayCanvas\Shaders\UI Prerendered Opaque.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Core\Video\Plugins\Android\Audio360\NOTICE.txt" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\Locomotion\Shaders\TriPlanarWorld.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Core\Video\Plugins\Android\Audio360\ThirdPartyNotices.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap-Mobile.shader" />
-     <None Include="Assets\Complete_Home_Interior_Pack\HELP.txt" />
-     <None Include="Assets\Oculus\SampleFramework\Usage\OVROverlayCanvas\Shaders\UI Prerendered.shader" />
-     <None Include="Assets\Oculus\Avatar\Samples\CrossPlatform\Readme.txt" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarSurfaceShaderPBS.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Materials\Hands_Transparent.shader" />
-     <None Include="Assets\TextMesh Pro\Fonts\LiberationSans - OFL.txt" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Shaders\Hands_02.shader" />
-     <None Include="Assets\Oculus\SampleFramework\Core\CustomHands\Materials\Hands_DiffBump.shader" />
-     <None Include="Assets\Oculus\Avatar\Resources\Materials\Expressive\Avatar_Mobile_SingleComponentExpressive.shader" />
-     <None Include="Assets\TextMesh Pro\Shaders\TMP_Sprite.shader" />
-     <None Include="Assets\Oculus\SampleFramework\license.txt" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\TcpConnector\ROSConnection.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MJoy.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\srv\MSetCameraInfoResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MInteractiveMarkerPose.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MInt16.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MInertia.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MLaserEcho.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\action\MGetMapAction.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\ActionGoal.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MMagneticField.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\ROSGeometry\ROSVector3.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MTwistWithCovariance.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MInt16MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\MessageToken.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MFloat64.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MImage.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\msg\MTableArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MPointCloud2.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MAccel.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MByte.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MPointField.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPoseArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Trajectory\msg\MMultiDOFJointTrajectoryPoint.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\action\MObjectRecognitionFeedback.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MLaserScan.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\Action.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\srv\MSetMapResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MInt32.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MAccelWithCovariance.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Diagnostic\msg\MDiagnosticStatus.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MChar.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\action\MGetMapResult.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MBatteryState.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Shape\msg\MMeshTriangle.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MAccelWithCovarianceStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MVector3Stamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MTemperature.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MInt8.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Octomap\srv\MGetOctomapResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPoseWithCovariance.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MRange.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MFloat32MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MMultiArrayDimension.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPointStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\MessageAutoGen.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\action\MGetMapActionFeedback.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MMultiArrayLayout.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MInteractiveMarkerControl.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Octomap\msg\MOctomapWithPose.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPose.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MRegionOfInterest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MTransform.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MQuaternionStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\srv\MSetCameraInfoRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\MessageParser.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPose2D.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\ActionResult.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\MessageTokenizer.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPoseWithCovarianceStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPoint.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MEmpty.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\srv\MGetPlanResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\ServiceAutoGen.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Shape\msg\MMesh.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Actionlib\msg\MGoalStatusArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\action\MGetMapGoal.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\msg\MOccupancyGrid.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MByteMultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MTime.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\MsgAutoGenUtilities.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\msg\MRecognizedObject.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MNavSatStatus.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MTransformStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\ActionFeedback.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\TcpConnector\TaskPauser.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\action\MObjectRecognitionActionGoal.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MUInt8.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MInt64.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MUInt64.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MRelativeHumidity.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Diagnostic\srv\MSelfTestResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\msg\MTable.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MInteractiveMarkerUpdate.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MImu.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\ROSGeometry\CoordinateSpaces.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MChannelFloat32.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Octomap\srv\MGetOctomapRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\Message.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Actionlib\msg\MGoalStatus.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MInt8MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MMarker.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\RosTcpEndpoint\srv\MRosUnityTopicListResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MUInt32.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MUInt16.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Actionlib\msg\MGoalID.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\TcpConnector\HUDPanel.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\srv\MLoadMapResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MQuaternion.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MUInt8MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\action\MObjectRecognitionGoal.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Octomap\msg\MOctomap.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\msg\MPath.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MBool.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MInteractiveMarkerFeedback.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MImageMarker.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Diagnostic\srv\MAddDiagnosticsResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MJointState.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\srv\MSetMapRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Trajectory\msg\MMultiDOFJointTrajectory.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MUInt16MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MInt64MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\ROSGeometry\ROSQuaternion.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\srv\MGetMapResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MMarkerArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\action\MObjectRecognitionAction.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MIlluminance.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPolygon.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\action\MGetMapActionGoal.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MInteractiveMarkerInit.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\srv\MLoadMapRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\msg\MObjectType.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MString.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\action\MGetMapActionResult.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\msg\MRecognizedObjectArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPoseStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\srv\MGetObjectInformationResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\action\MObjectRecognitionResult.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MTimeReference.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MWrenchStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MCameraInfo.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MMultiDOFJointState.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MTwistStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\RosTcpEndpoint\msg\MRosUnitySysCommand.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Diagnostic\srv\MSelfTestRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Trajectory\msg\MJointTrajectoryPoint.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MAccelStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\RosTcpEndpoint\srv\MRosUnityTopicListRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\ActionAutoGen.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Diagnostic\srv\MAddDiagnosticsRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MFluidPressure.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MJoyFeedback.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Octomap\srv\MBoundingBoxQueryRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MInt32MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\msg\MMapMetaData.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\action\MObjectRecognitionActionFeedback.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\RosTcpEndpoint\msg\MRosUnitySrvMessage.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MTwistWithCovarianceStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MMultiEchoLaserScan.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MJoyFeedbackArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Diagnostic\msg\MKeyValue.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MVector3.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPoint32.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MFloat32.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MTwist.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MHeader.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\action\MGetMapFeedback.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MDuration.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MFloat64MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Octomap\srv\MBoundingBoxQueryResponse.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Diagnostic\msg\MDiagnosticArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\msg\MGridCells.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MColorRGBA.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\action\MObjectRecognitionActionResult.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\srv\MGetObjectInformationRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\srv\MGetMapRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MInertiaStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MUInt64MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MMenuEntry.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\ObjectRecognition\msg\MObjectInformation.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MPolygonStamped.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MNavSatFix.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MCompressedImage.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Shape\msg\MPlane.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Trajectory\msg\MJointTrajectory.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Shape\msg\MSolidPrimitive.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\srv\MGetPlanRequest.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Visualization\msg\MInteractiveMarker.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Stereo\msg\MDisparityImage.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Geometry\msg\MWrench.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Nav\msg\MOdometry.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Std\msg\MUInt32MultiArray.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\RosTcpEndpoint\msg\MRosUnityError.cs" />
+     <Compile Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\MessageGeneration\PregeneratedMessages\Sensor\msg\MPointCloud.cs" />
+     <None Include="Assets\ROS-TCP-Connector\com.unity.robotics.ros-tcp-connector\Runtime\Unity.Robotics.ROSTCPConnector.asmdef" />
     <Reference Include="UnityEngine">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -511,8 +442,23 @@
     <Reference Include="UnityEditor.UnityConnectModule">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
     </Reference>
+    <Reference Include="UnityEditor.Graphs">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/Managed/UnityEditor.Graphs.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.WindowsStandalone.Extensions">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll</HintPath>
+    </Reference>
+    <Reference Include="UnityEditor.LinuxStandalone.Extensions">
+        <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
+    </Reference>
     <Reference Include="bootstrap">
         <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Assets/Uniton/bootstrap.dll</HintPath>
+    </Reference>
+    <Reference Include="editor">
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Assets/Uniton/Editor/editor.dll</HintPath>
+    </Reference>
+    <Reference Include="ICSharpCode.NRefactory">
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/PackageCache/com.unity.render-pipelines.core@10.3.2/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -859,173 +805,14 @@
     <Reference Include="System.Xml.Serialization">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/NetStandard/compat/2.0.0/shims/netfx/System.Xml.Serialization.dll</HintPath>
     </Reference>
-    <Reference Include="Unity.Recorder.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VSCode.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Robotics.URDFImporter.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Robotics.URDFImporter.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Searcher.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
         <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.InputSystem">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Rider.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
         <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.SpatialTracking">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.InteractionSubsystems">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ShaderGraph.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.WindowsMixedReality.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.ARSubsystems.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Management">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.ARSubsystems">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Oculus.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Oculus.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Recorder">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Recorder.Base">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.Base.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.WindowsMixedReality">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.VisualStudio.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="vhacd">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/vhacd.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Robotics.URDFImporter">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Robotics.URDFImporter.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Management.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.TextMeshPro">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Interaction.Toolkit">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Sysroot.Linux_x86_64">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Runtime">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Subsystem.Registration">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Mathematics">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Universal.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Timeline.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Interaction.Toolkit.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.XR.Oculus">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Oculus.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEditor.SpatialTracking">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.RenderPipelines.Core.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.SysrootPackage.Editor">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Oculus.Platform.csproj">
-      <Project>{a1a4914d-ce77-9dbe-dfbe-749d738a3a09}</Project>
-      <Name>Oculus.Platform</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.Platform.Editor.csproj">
-      <Project>{896c752c-4b77-e402-3efc-1a3e21743145}</Project>
-      <Name>Oculus.Platform.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.VR.csproj">
-      <Project>{abb91ddd-1c6e-d355-ca1c-f2c712b87faf}</Project>
-      <Name>Oculus.VR</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.VR.Editor.csproj">
-      <Project>{02030996-3960-9980-3a9d-b59139d7f721}</Project>
-      <Name>Oculus.VR.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Oculus.VR.Scripts.Editor.csproj">
-      <Project>{44113506-6016-f2cf-12c3-3a3b40452069}</Project>
-      <Name>Oculus.VR.Scripts.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Robotics.ROSTCPConnector.csproj">
-      <Project>{cec2b9dc-7eb6-d400-cc47-9df286d62ec6}</Project>
-      <Name>Unity.Robotics.ROSTCPConnector</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
