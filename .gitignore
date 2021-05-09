@@ -7,3 +7,4 @@ __pycache__
 config.py
 /.idea/*
 /__pycache__/*
+/archive/*
