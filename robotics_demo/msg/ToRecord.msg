@@ -4,6 +4,7 @@ sensor_msgs/Image shoulderImage
 sensor_msgs/Image gripperImage
 PositionCommand a
 int32 timestep
+float64 data_gen_time
 float64 data_arrival_time
 float64 data_processed_time
 float64 beat_sent_time

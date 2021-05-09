@@ -52,11 +52,10 @@ windows:
       # synchronize: after
       panes:
         - cd catkin_ws && catkin_make && source /catkin_ws/devel/setup.bash && roscore
-        - sleep 10 && source /catkin_ws/devel/setup.bash && rosparam load /catkin_ws/src/unity_robotics_env/configs.yaml && python3 /catkin_ws/src/unity_robotics_env/robotics_demo/scripts/server_endpoint.py
-        - sleep 10 && source /catkin_ws/devel/setup.bash && python3 /catkin_ws/src/unity_robotics_env/robotics_demo/scripts/xyz_rpy_g_to_joints.py
-        - sleep 10 && source /catkin_ws/devel/setup.bash && python3 /catkin_ws/src/unity_robotics_env/robotics_demo/scripts/recorder.py
-        - sleep 10 && source /catkin_ws/devel/setup.bash && python3 /catkin_ws/src/unity_robotics_env/robotics_demo/scripts/timer_loop.py
-        - sleep 10 && source /catkin_ws/devel/setup.bash && python3 /catkin_ws/src/unity_robotics_env/robotics_demo/scripts/core_logic.py
-        - sleep 10 && source /catkin_ws/devel/setup.bash && jupyter notebook --allow-root --ip=172.17.0.2 --port=8888 --no-browser
+        - sleep 13 && source /catkin_ws/devel/setup.bash && rosparam load /catkin_ws/src/robotics/unity_robotics_env/configs.yaml && python3 /catkin_ws/src/robotics/unity_robotics_env/robotics_demo/scripts/server_endpoint.py
+        - sleep 13 && source /catkin_ws/devel/setup.bash && python3 /catkin_ws/src/robotics/unity_robotics_env/robotics_demo/scripts/recorder.py
+        - sleep 13 && source /catkin_ws/devel/setup.bash && python3 /catkin_ws/src/robotics/unity_robotics_env/robotics_demo/scripts/core_logic_envHz.py
+        - sleep 13 && source /catkin_ws/devel/setup.bash && python3 /catkin_ws/src/robotics/unity_robotics_env/robotics_demo/scripts/xyz_rpy_g_to_joints.py
+        - sleep 13 && source /catkin_ws/devel/setup.bash && jupyter notebook --allow-root --ip=172.17.0.2 --port=8888 --no-browser
         # - sleep 10 && source /catkin_ws/devel/setup.bash && rostopic hz /state
         

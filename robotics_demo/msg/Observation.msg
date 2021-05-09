@@ -3,6 +3,10 @@ AchievedGoal ag
 Velocities vels
 sensor_msgs/Image shoulderImage
 sensor_msgs/Image gripperImage
+uint8[] imq2
+uint8[] imq3
+uint8[] imq4
+float64 time
 
 
 

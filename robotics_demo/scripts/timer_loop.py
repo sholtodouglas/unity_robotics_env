@@ -27,7 +27,7 @@ def listener():
             # Triggers corelogic acting
             try:
                 next_time = next_time + 1/CONTROL_FREQUENCY
-                print(timestep, t)
+                #print(timestep, t)
                 get_obs_pub.publish(TimerBeat(timestep, t))
                 timestep += 1
             except:

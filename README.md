@@ -3,12 +3,12 @@ ROS_IP: 172.17.0.2
 ROS_TCP_PORT: 10000
 # Set up a docker container with ports 10000 and 5005, and mount your current directory as the unity robotics
 # env. This assumes we are in the git repo base folder
-cd Desktop/unity_robotics_env
-docker run -it  -p 10000:10000 -p 5005:5005 -p 8888:8888 -v %cd%:/catkin_ws/src/unity_robotics_env robotics
+cd Desktop/robotics
+docker run -it --gpus=all --env NVIDIA_DISABLE_REQUIRE=1 -e TZ=Australia/Sydney -p 10000:10000 -p 5005:5005 -p 8888:8888 -v %cd%:/catkin_ws/src/robotics robotics 
 
 ## Run this
 source /opt/ros/noetic/setup.bash
-tmuxinator start -p catkin_ws/src/unity_robotics_env/mission_control.yml
+tmuxinator start -p catkin_ws/src/robotics/unity_robotics_env/mission_control.yml
 
 
 ## To access the jupyter notebook ( and enter the token if necessary)
@@ -19,16 +19,8 @@ http://127.0.0.1:8888
 
 tmux kill-session -t mission_control
 
-cp -r /catkin_ws/src/data/UR5 /catkin_ws/src/unity_robotics_env/data/UR5
 
-
-
-
-
-
-
-
-
+docker run -it --gpus all nvidia/cuda:11.2.2-devel-ubuntu20.04 /bin/bash
 
 
 
@@ -132,6 +124,13 @@ List of Todos!
 tmuxinator
 tqdm
 ros noetic
+tensorflow_probability
+natsort
+imagio
+wandb
+sudo apt-get -y install nano
+
+
 
 export EDITOR='/usr/bin/nano'
 export SHELL='/bin/bash'
@@ -141,3 +140,32 @@ make sure doors are not collison matrix approved with their base
 
 # Unity tips n tricks
 - Make use of layers, avoid collision with things that don't need to (a door and its cupboard), hide the controllers from view etc
+
+apt-get update
+apt-get install sudo -y
+sudo apt-get install -y python3
+sudo apt install python3-pip
+pip3 install tensorflow
+sudo sh -c 'echo "deb http://packages.ros.org/ros/ubuntu focal main" > /etc/apt/sources.list.d/ros-latest.list'
+sudo apt-key adv --keyserver 'hkp://keyserver.ubuntu.com:80' --recv-key C1CF6E31E6BADE8868B172B4F42ED6FBAB17C654
+sudo apt install ros-noetic-ros-base
+
+
+sudo apt-get install --no-install-recommends \
+    cuda-11-2 \
+    libcudnn8=8.0.4.30-1+cuda11.2  \
+    libcudnn8-dev=8.0.4.30-1+cuda11.2
+
+
+sudo apt-get install libcudnn8=8.1.1.*-1+cuda11.2
+sudo apt-get install libcudnn8-dev=8.1.1.*-1+cuda11.2
+
+sudo ln -s /usr/local/cuda-11.2/targets/x86_64-linux/lib/libcusolver.so.11 /usr/local/cuda-11.2/targets/x86_64-linux/lib/libcusolver.so.10
+
+
+sudo ln -s /usr/local/cuda-11.2/targets/x86_64-linux/lib/libcusolver.so.11 /usr/local/cuda-11.2/targets/x86_64-linux/lib/libcusolver.so.10
+# Had to put this in bashrc fuckin hell
+export LD_LIBRARY_PATH=/usr/local/cuda-11.2/lib64:/usr/local/cuda-11.2/lib64
+
+
+gsutil -m cp "gs://lfp_europe_west4_a/saved_models/UnityB0_00/checkpoint" "gs://lfp_europe_west4_a/saved_models/UnityB0_00/ckpt-20.data-00000-of-00001" "gs://lfp_europe_west4_a/saved_models/UnityB0_00/ckpt-20.index" .

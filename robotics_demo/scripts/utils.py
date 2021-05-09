@@ -6,6 +6,7 @@ from PIL import Image, ImageOps
 import numpy as np
 import pybullet
 import time
+import threading
 
 def rosImg_to_numpy(img: ImageMsg):
     image_height = img.width
@@ -30,10 +31,43 @@ def ag_to_vector(o: AchievedGoal):
     return np.array([o.obj1_pos_x, o.obj1_pos_y, o.obj1_pos_z, o.obj1_q1, o.obj1_q2, o.obj1_q3, o.obj1_q4, o.button1, o.button2, o.button3, o.drawer, o.door])
 
 def ag_to_ROSmsg(o: np.ndarray):
-    return AchievedGoal(o[0],o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[9], o[9], o[10], o[11])
+    return AchievedGoal(o[0],o[1], o[2], o[3], o[4], o[5], o[6], o[7], o[8], o[9], o[10], o[11])
 
 def act_to_jointPositionsROSmsg(j: np.ndarray):
     return JointPositions(j[0], j[1], j[2], j[3], j[4], j[5], j[6], time.time())
 
 def unstack(a, axis = 0):
     return [np.take(a, i, axis = axis) for i in range(a.shape[axis])]
+
+
+
+class ServiceTimeouter(object):
+    """ Ros services cannot be timed out. Occasionally the IK solver would take
+        up to 5 seconds to respond. This is a workaround class. """
+
+    def __init__(self, srv, args=(), kwargs={}):
+        self.srv = srv
+        self.args = args
+        self.kwargs = kwargs
+        self.timeout = 1.0
+        self.retval = None
+        self.returned = False
+        self.thread = threading.Thread(target=self._call_thread)
+
+    def _call_thread(self):
+        try:
+            self.retval = self.srv(*self.args, **self.kwargs)
+            self.returned = True
+        except rospy.ServiceException as e:
+            rospy.loginfo("Service call failed: %s" % (e,))
+        except AttributeError:
+            rospy.loginfo("Socket.close() exception. Socket has become 'None'")
+
+    def call(self):
+        self.thread.start()
+        timeout = time.time() + self.timeout
+        while time.time() < timeout and self.thread.is_alive():
+            time.sleep(0.001)
+        if not self.returned:
+            raise Exception("Service call took too long!")
+        return self.retval

@@ -19,13 +19,15 @@ os.sys.path.insert(0, currentdir)
 from utils import rosImg_to_numpy, proprio_quat_to_rpy_vector, proprio_rpy_to_ROSmsg, ag_to_vector, ag_to_ROSmsg, proprio_rpy_to_rpy_vector
 from std_msgs.msg import String
 from tqdm import tqdm
+import shutil
 
 RECORDING = False
 stepCount = 0
-PACKAGE_LOCATION = os.path.dirname(os.path.realpath(__file__))[:-(len("/robotics_demo/scripts"))] # remove "/scripts"
-base_path = PACKAGE_LOCATION +'/data/UR5_test/'
+# Lets just pipe it direct into LFP
+PACKAGE_LOCATION = os.path.dirname(os.path.realpath(__file__))[:-(len("/unity_robotics_env/robotics_demo/scripts"))] + '/learning_from_play/'
+base_path = PACKAGE_LOCATION +'/data/envHz25/'
 obs_act_path = base_path + 'obs_act_etc/'
-env_state_path = base_path + 'ims/'
+env_state_path = base_path + 'states_and_ims/'
 example_path = None
 npz_path = None
 
@@ -54,7 +56,7 @@ def save_timestep(timestep: ToRecord):
     last_tstep_received = time.time()
 
     if RECORDING:
-        print(stepCount)
+        # print(stepCount)
         ag = ag_to_vector(timestep.state.ag)
         arm_state = proprio_rpy_to_rpy_vector(timestep.state.proprio)
         obs_array.append(np.concatenate([arm_state, ag]))
@@ -63,7 +65,7 @@ def save_timestep(timestep: ToRecord):
         act = timestep.a 
         acts_array.append(proprio_rpy_to_rpy_vector(timestep.a))
 
-        times_array.append({'timestep': timestep.timestep,
+        times_array.append({'timestep': timestep.timestep, 'data_gen_time': timestep.data_gen_time,
                     'data_arrival_time': timestep.data_arrival_time, 'data_processed_time': timestep.data_processed_time, 
                     'beat_sent_time':timestep.beat_sent_time, 'act_begin_time': timestep.act_begin_time, 'model_processed_time': timestep.model_processed_time})
         
@@ -72,6 +74,7 @@ def save_timestep(timestep: ToRecord):
         gripper_imgs.append(rosImg_to_numpy(timestep.gripperImage))
         
         stepCount += 1
+        print(stepCount)
 
 def start_recording(b: Bool):
     global RECORDING, stepCount, last_tstep_received
@@ -79,6 +82,7 @@ def start_recording(b: Bool):
         RECORDING = True
         last_tstep_received = time.time()
         update_filepaths()
+
         stepCount = 0
         print(f"Started recording at {npz_path}")
         saving_status.publish("Recording")
@@ -87,19 +91,28 @@ def start_recording(b: Bool):
 def save_trajectory(x: RPYState):
     
     global RECORDING, obs_array, acts_array, ag_array, times_array, shoulder_imgs, gripper_imgs
-    if RECORDING:
-        ping()
-        saving_status.publish("Saving")
-        RECORDING = False
-        np.savez(npz_path + '/data', acts=acts_array, obs=obs_array, achieved_goals=ag_array, times=times_array, allow_pickle=True)
-        for i in tqdm(range(0, len(gripper_imgs))):
-            plt.imsave(example_path + f'/ims/{i}_shoulder.jpg', shoulder_imgs[i])
-            plt.imsave(example_path + f'/ims/{i}_gripper.jpg', gripper_imgs[i])
-        obs_array, acts_array, ag_array, times_array, shoulder_imgs, gripper_imgs = [], [], [], [], [], []
-        # might do us well to include stuff like controllable achieved goal TODO
-        print(f"Recorded {npz_path}")
-        saving_status.publish("Not recording")
-        ping()
+    try:
+        if RECORDING:
+            ping()
+            saving_status.publish("Saving")
+            RECORDING = False
+            np.savez(npz_path + '/data', acts=acts_array, obs=obs_array, achieved_goals=ag_array, times=times_array, allow_pickle=True)
+            for i in tqdm(range(0, len(gripper_imgs))):
+                plt.imsave(example_path + f'/ims/{i}_shoulder.jpg', shoulder_imgs[i])
+                plt.imsave(example_path + f'/ims/{i}_gripper.jpg', gripper_imgs[i])
+            obs_array, acts_array, ag_array, times_array, shoulder_imgs, gripper_imgs = [], [], [], [], [], []
+            # might do us well to include stuff like controllable achieved goal TODO
+            print(f"Recorded {npz_path}")
+            saving_status.publish("Not recording")
+            ping()
+    except Exception as e:
+        print(f"failed to record {e}")
+        try:
+            shutil.rmtree(example_path + '/ims')
+            shutil.rmtree(npz_path)
+        except Exception as e:
+            print(e)
+
         
 
 def ping():
@@ -145,8 +158,8 @@ def listener():
             if RECORDING and len(obs_array) > 0:
             #if we are mid recording, but it has been a while since the last timestep - cut off the 
             # trajectory, stop recording until instructed to do so
+                print('saving due to connection failure or exceeding RAM limit')
                 save_trajectory(RPYState())
-                RECORDING = False
 
 
 if __name__ == "__main__":

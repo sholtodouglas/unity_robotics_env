@@ -29,7 +29,7 @@ def IK(p_cmd):
     j_angs = IKSolver.calc_angles([x,y,z], [roll,pitch,yaw]) # TODO: Feed in current angles for better solutions 
     #print(j_angs)
     j_angs = np.array(j_angs) * (180/np.pi) # Unity uses degrees. TODO: Should we convert for this inside the env? TODO: Remember to convet back if reading!
-    print(j_angs)
+    # print(j_angs)
     cmd = JointPositions(j_angs[0],j_angs[1], j_angs[2], j_angs[3], j_angs[4], j_angs[5], gripper, time.time())
     return cmd
 
