@@ -1,6 +1,7 @@
 # Setting up this environment to work with learning from play
 There are three steps
- - Clone this repo for the env and interfacing code. As Unity packages, install the https://github.com/Unity-Technologies/ROS-TCP-Connector (use dev branch, or the files provided) and https://github.com/Unity-Technologies/URDF-Importer (only needed if you want to change the arm). The dev version of ROS-TCP-Connecter we are using can be found in the Unity env's assets folder - install it directly from disk rather than using git URL. 
+ - Clone this repo for the env and interfacing code. As Unity packages, install the https://github.com/Unity-Technologies/ROS-TCP-Connector (use the files provided) and https://github.com/Unity-Technologies/URDF-Importer (only needed if you want to change the arm). The dev version of ROS-TCP-Connecter we are using can be found in the Unity env's assets folder - install it directly from disk rather than using git URL. For the env, you'll need to pop the complete home assets interior package in there. Use this drive link https://drive.google.com/drive/folders/1TAvZbUMV5q9_phzpmqfOqVl6jAIDJDxE?usp=sharing
+ 
  - Download the docker image sholto/robotics
  - Download the lfp library
  - Optional - download the test set https://drive.google.com/drive/folders/10jdoW8XLX7zJlKsVD5fKg8NFZfjbUn8w?usp=sharing. This will let you play out data.
