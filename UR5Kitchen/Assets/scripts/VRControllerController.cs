@@ -57,20 +57,32 @@ public class VRControllerController: MonoBehaviour
     private const int step = 4;
     
     public GameObject obj1;
+    public GameObject obj2;
     public GameObject button1;
     private PhysicsButton button1_script;
+    private GameObject button1_base;
+ 
 
     public GameObject button2;
     private PhysicsButton button2_script;
+    private GameObject button2_base;
 
     public GameObject button3;
     private PhysicsButton button3_script;
+    private GameObject button3_base;
 
     public GameObject drawer;
     private DrawerController drawer_script;
 
     public GameObject cupboard;
     private DoorController cupboard_script;
+
+    private float x_min = -0.7f;
+    private float x_max = -0.13f;
+    private float z_min = 0.4f;
+    private float z_max = 0.7f;
+    private float y_button = 0.0569f;
+    private float y_block = 0.18f;
 
 
     // Control / GUI specific stuff
@@ -149,6 +161,8 @@ public class VRControllerController: MonoBehaviour
     // 3. Turn off the resetting flag
     private bool resetting = false;
     private ResetInfo resetState;
+
+    private static readonly System.Random random = new System.Random();
 
     IEnumerator EngageForceAfterInit()
     {
@@ -249,7 +263,12 @@ public class VRControllerController: MonoBehaviour
         reset_to_default();
 
         colliders = this.gameObject.GetComponentsInChildren<Collider>();
-        
+
+        button1_base = button1.transform.parent.gameObject.transform.parent.gameObject;
+        button2_base = button2.transform.parent.gameObject.transform.parent.gameObject;
+        button3_base = button3.transform.parent.gameObject.transform.parent.gameObject;
+
+        resetEnvironment(randomizeAchievedGoal());
     }
     
     // ####################################    Setters ######################################
@@ -367,9 +386,34 @@ public class VRControllerController: MonoBehaviour
 
     }
 
+    static float RandomFloat(float min, float max){
+        
+        double val = (random.NextDouble() * (max - min) + min);
+        return (float)val;
+    }
+
+
     AchievedGoal GetAchievedGoal() {
 
         Transform obj_pose = obj1.transform;
+        Transform button1pose = button1_base.transform;
+        Transform button2pose = button2_base.transform;
+        Transform button3pose = button3_base.transform;
+
+        Vector3 obj2_position; 
+        Quaternion obj2_rotation;
+        Int16 obj2_present;
+
+        if (obj2.activeInHierarchy) {
+            obj2_rotation = obj2.transform.rotation;
+            obj2_position = obj2.transform.position;
+            obj2_present = 1;
+            
+        } else {
+           obj2_rotation = new Quaternion(0f,0f,0f,0f);
+           obj2_position = new Vector3(0, 0, 0);
+           obj2_present = 0;
+        }
 
         AchievedGoal ag = new AchievedGoal(
                 obj_pose.position.x, //start obj
@@ -378,12 +422,29 @@ public class VRControllerController: MonoBehaviour
                 obj_pose.rotation.x,
                 obj_pose.rotation.y,
                 obj_pose.rotation.z,
-                obj_pose.rotation.w,
+                obj_pose.rotation.w,  // end obj 
                 button1_script.value,
                 button2_script.value,
                 button3_script.value,
                 drawer_script.value,
-                cupboard_script.value); // end obj 
+                cupboard_script.value,
+                obj2_present,
+                obj2_position.x, //start obj
+                obj2_position.y,
+                obj2_position.z,
+                obj2_rotation.x,
+                obj2_rotation.y,
+                obj2_rotation.z,
+                obj2_rotation.w,  // end obj 
+                button1pose.position.x,
+                button1pose.position.y,
+                button1pose.position.z,
+                button2pose.position.x,
+                button2pose.position.y,
+                button2pose.position.z,
+                button3pose.position.x,
+                button3pose.position.y,
+                button3pose.position.z);
 
         return ag;
 
@@ -563,7 +624,44 @@ public class VRControllerController: MonoBehaviour
         articulate_joints(joints);
     }
 
-    // Given a full state, resets
+        AchievedGoal randomizeAchievedGoal() {
+
+
+            AchievedGoal ag = new AchievedGoal(
+                    RandomFloat(x_min, x_max), //start obj
+                    y_block,
+                    RandomFloat(z_min, z_max),
+                    0f,
+                    0f,
+                    0f,
+                    1f,  // end obj 
+                    0f,  //button 1
+                    0f,  //button 2
+                    0f, //button 3
+                    0f, // drawer
+                    0f, // door
+                    1, // obj2 present
+                    RandomFloat(x_min, x_max), //start obj
+                    y_block,
+                    RandomFloat(z_min, z_max),
+                    0f,
+                    0f,
+                    0f,
+                    1f,  // end obj  
+                    RandomFloat(x_min, x_max), //start obj
+                    y_button,
+                    RandomFloat(z_min, z_max),
+                    RandomFloat(x_min, x_max), //start obj
+                    y_button,
+                    RandomFloat(z_min, z_max),
+                    RandomFloat(x_min, x_max), //start obj
+                    y_button,
+                    RandomFloat(z_min, z_max));
+
+            return ag;
+    }
+
+    // Given a full state, resets - this resets the simple state information
     void resetEnvironment(AchievedGoal ag) 
     {
         // reset object 1
@@ -571,6 +669,15 @@ public class VRControllerController: MonoBehaviour
         obj1.transform.position = new Vector3(ag.obj1_pos_x, ag.obj1_pos_y, ag.obj1_pos_z);
         drawer_script.Reset(ag.drawer);
         cupboard_script.Reset(ag.door);
+
+        // var vec = new Vector2(ag.obj2_pos_x, ag.obj1_pos_x);
+        if (ag.obj2_present == 1) {
+            obj2.transform.rotation = new Quaternion(ag.obj2_q1, ag.obj2_q2, ag.obj2_q3, ag.obj2_q4);
+            obj2.transform.position = new Vector3(ag.obj2_pos_x, ag.obj2_pos_y, ag.obj2_pos_z);
+            button1_base.transform.position = new Vector3(ag.button1_x, ag.button1_y, ag.button1_z);
+            button2_base.transform.position  = new Vector3(ag.button2_x, ag.button2_y, ag.button2_z);
+            button3_base.transform.position  = new Vector3(ag.button3_x, ag.button3_y, ag.button3_z);
+        }
 
     }
     
@@ -695,6 +802,7 @@ public class VRControllerController: MonoBehaviour
             proprio.pos_x = -0.4F;
             proprio.pos_y = 0.2F;
             proprio.pos_z = 0.0F;
+            resetEnvironment(randomizeAchievedGoal());
             RPYState r = new RPYState(
                     proprio,
                     GetAchievedGoal() // randomize this up above if desired

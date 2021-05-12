@@ -7,9 +7,9 @@ using Unity.Robotics.ROSTCPConnector.MessageGeneration;
 
 namespace RosMessageTypes.RoboticsDemo
 {
-    public class MAchievedGoal : Message
+    public class MDetailedEnvState : Message
     {
-        public const string RosMessageName = "robotics_demo/AchievedGoal";
+        public const string RosMessageName = "robotics_demo/DetailedEnvState";
 
         public float obj1_pos_x;
         public float obj1_pos_y;
@@ -23,7 +23,6 @@ namespace RosMessageTypes.RoboticsDemo
         public float button3;
         public float drawer;
         public float door;
-        public short obj2_present;
         public float obj2_pos_x;
         public float obj2_pos_y;
         public float obj2_pos_z;
@@ -41,7 +40,7 @@ namespace RosMessageTypes.RoboticsDemo
         public float button3_y;
         public float button3_z;
 
-        public MAchievedGoal()
+        public MDetailedEnvState()
         {
             this.obj1_pos_x = 0.0f;
             this.obj1_pos_y = 0.0f;
@@ -55,7 +54,6 @@ namespace RosMessageTypes.RoboticsDemo
             this.button3 = 0.0f;
             this.drawer = 0.0f;
             this.door = 0.0f;
-            this.obj2_present = 0;
             this.obj2_pos_x = 0.0f;
             this.obj2_pos_y = 0.0f;
             this.obj2_pos_z = 0.0f;
@@ -74,7 +72,7 @@ namespace RosMessageTypes.RoboticsDemo
             this.button3_z = 0.0f;
         }
 
-        public MAchievedGoal(float obj1_pos_x, float obj1_pos_y, float obj1_pos_z, float obj1_q1, float obj1_q2, float obj1_q3, float obj1_q4, float button1, float button2, float button3, float drawer, float door, short obj2_present, float obj2_pos_x, float obj2_pos_y, float obj2_pos_z, float obj2_q1, float obj2_q2, float obj2_q3, float obj2_q4, float button1_x, float button1_y, float button1_z, float button2_x, float button2_y, float button2_z, float button3_x, float button3_y, float button3_z)
+        public MDetailedEnvState(float obj1_pos_x, float obj1_pos_y, float obj1_pos_z, float obj1_q1, float obj1_q2, float obj1_q3, float obj1_q4, float button1, float button2, float button3, float drawer, float door, float obj2_pos_x, float obj2_pos_y, float obj2_pos_z, float obj2_q1, float obj2_q2, float obj2_q3, float obj2_q4, float button1_x, float button1_y, float button1_z, float button2_x, float button2_y, float button2_z, float button3_x, float button3_y, float button3_z)
         {
             this.obj1_pos_x = obj1_pos_x;
             this.obj1_pos_y = obj1_pos_y;
@@ -88,7 +86,6 @@ namespace RosMessageTypes.RoboticsDemo
             this.button3 = button3;
             this.drawer = drawer;
             this.door = door;
-            this.obj2_present = obj2_present;
             this.obj2_pos_x = obj2_pos_x;
             this.obj2_pos_y = obj2_pos_y;
             this.obj2_pos_z = obj2_pos_z;
@@ -121,7 +118,6 @@ namespace RosMessageTypes.RoboticsDemo
             listOfSerializations.Add(BitConverter.GetBytes(this.button3));
             listOfSerializations.Add(BitConverter.GetBytes(this.drawer));
             listOfSerializations.Add(BitConverter.GetBytes(this.door));
-            listOfSerializations.Add(BitConverter.GetBytes(this.obj2_present));
             listOfSerializations.Add(BitConverter.GetBytes(this.obj2_pos_x));
             listOfSerializations.Add(BitConverter.GetBytes(this.obj2_pos_y));
             listOfSerializations.Add(BitConverter.GetBytes(this.obj2_pos_z));
@@ -168,8 +164,6 @@ namespace RosMessageTypes.RoboticsDemo
             offset += 4;
             this.door = BitConverter.ToSingle(data, offset);
             offset += 4;
-            this.obj2_present = BitConverter.ToInt16(data, offset);
-            offset += 2;
             this.obj2_pos_x = BitConverter.ToSingle(data, offset);
             offset += 4;
             this.obj2_pos_y = BitConverter.ToSingle(data, offset);
@@ -208,7 +202,7 @@ namespace RosMessageTypes.RoboticsDemo
 
         public override string ToString()
         {
-            return "MAchievedGoal: " +
+            return "MDetailedEnvState: " +
             "\nobj1_pos_x: " + obj1_pos_x.ToString() +
             "\nobj1_pos_y: " + obj1_pos_y.ToString() +
             "\nobj1_pos_z: " + obj1_pos_z.ToString() +
@@ -221,7 +215,6 @@ namespace RosMessageTypes.RoboticsDemo
             "\nbutton3: " + button3.ToString() +
             "\ndrawer: " + drawer.ToString() +
             "\ndoor: " + door.ToString() +
-            "\nobj2_present: " + obj2_present.ToString() +
             "\nobj2_pos_x: " + obj2_pos_x.ToString() +
             "\nobj2_pos_y: " + obj2_pos_y.ToString() +
             "\nobj2_pos_z: " + obj2_pos_z.ToString() +

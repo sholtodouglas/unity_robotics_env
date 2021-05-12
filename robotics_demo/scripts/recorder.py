@@ -21,11 +21,12 @@ from std_msgs.msg import String
 from tqdm import tqdm
 import shutil
 
+
 RECORDING = False
 stepCount = 0
 # Lets just pipe it direct into LFP
 PACKAGE_LOCATION = os.path.dirname(os.path.realpath(__file__))[:-(len("/unity_robotics_env/robotics_demo/scripts"))] + '/learning_from_play/'
-base_path = PACKAGE_LOCATION +'/data/envHz25/'
+base_path = PACKAGE_LOCATION +'/data/diverse/'
 obs_act_path = base_path + 'obs_act_etc/'
 env_state_path = base_path + 'states_and_ims/'
 example_path = None
@@ -121,8 +122,6 @@ def ping():
     except:
         print("This exception is ok its to make it beep")
         pass
-
-    
 
     
 

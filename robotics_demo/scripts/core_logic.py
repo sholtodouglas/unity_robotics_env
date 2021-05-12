@@ -67,72 +67,8 @@ print('Service Found')
 # resetting flag
 resetting = False
 # buffer of acts to replay from - if this is full, pop them off one by one!
-replay_acts = []
 act_clip = np.array([0.1, 0.1, 0.1, 0.2, 0.2, 0.2, 0.4])
 
-def check_reset_convergence(proprio, ag, threshold = 0.05):
-    global proprioceptive_state, achieved_goal
-    proprio_checks = abs(proprio - proprioceptive_state) < threshold
-    ag_checks = abs(ag-achieved_goal) < threshold
-    all_checks = np.concatenate([proprio_checks, ag_checks])
-
-    if np.all(all_checks):
-        return True
-    else:
-        return False
-
-
-# A function which resets the environment
-def reset(state: RPYState):
-    resetting = True
-    t_reset = time.time()
-    pos_cmd_pub.publish(state.proprio)
-    env_reset_pub.publish(state.ag)
-    # keep looping until too much time has elapsed, or the state is sufficiently close to the desired one
-    np_proprio = proprio_rpy_to_rpy_vector(state.proprio)
-    np_ag = ag_to_vector(state.ag)
-    
-
-    r = rospy.Rate(10) # 10hz 
-    while not rospy.is_shutdown():
-        t = time.time()
-        if (t > t_reset+2):
-            print("Reset")
-            resetting = False
-            return
-        # elif check_reset_convergence(np_proprio, np_ag):
-        #     print("Reset converged")
-        #     resetting = False
-        #     return
-        else:
-            pos_cmd_pub.publish(state.proprio)
-            env_reset_pub.publish(state.ag)
-        r.sleep() # ros sleep for a little while before checking convergence again
-            
-def replay(replay: ReplayInfo):
-    global replay_acts
-    acts = np_to_multiarray.to_numpy_f32(replay.acts) # should be T, 7 (ACT_DIM)
-    acts = unstack(acts) # will produce a list of acts we can pop from 
-    replay_acts += acts
-    reset(replay.resetState)
-
-
-
-# A series of functions which set the goal dependent on states or goal space
-def set_goal(goal: Goal):
-    '''
-    A function which subscribes to 'img goal', encodes and sends to set goal function
-    '''
-    global g
-    if goal.type == 'state':
-        sg = goal.state_goal
-        g = np.array([sg.obj1_pos_x, sg.obj1_pos_y, sg.obj1_pos_z, sg.obj1_q1, sg.obj1_q2, sg.obj1_q3, sg.obj1_q4])
-    elif goal.type == 'img':
-        img_goal = np.expand_dims(rosImg_to_numpy(img_goal)) # [1, H,W,C]
-        g = cnn(goal.img_goal)
-    elif goal.type == 'lang':
-        g = sentence_encoder(goal.lang_goal)
-    raise NotImplementedError # not done yet
 
 def register_vr_controller(cmd: QuaternionProprioState):
     '''
@@ -257,9 +193,9 @@ def listener():
     #rospy.Subscriber("beat", TimerBeat, act)
     # Listens for the VR controller pos, updates the variable to store it
     rospy.Subscriber("xyz_quat_g_command", QuaternionProprioState, register_vr_controller)
-    rospy.Subscriber("goal", Goal, set_goal)
-    rospy.Subscriber("reset", RPYState, reset) # state is the commanded info
-    rospy.Subscriber("replay", ReplayInfo, replay)
+    #rospy.Subscriber("goal", Goal, set_goal)
+    #rospy.Subscriber("reset", RPYState, reset) # state is the commanded info
+    #rospy.Subscriber("replay", ReplayInfo, replay)
 
     rospy.spin()
 

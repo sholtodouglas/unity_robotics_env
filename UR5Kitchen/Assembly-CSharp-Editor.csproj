@@ -295,16 +295,10 @@
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/PlaybackEngines/LinuxStandaloneSupport/UnityEditor.LinuxStandalone.Extensions.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.NRefactory">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/PackageCache/com.unity.render-pipelines.core@10.3.2/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
-    </Reference>
-    <Reference Include="bootstrap">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Assets/Uniton/bootstrap.dll</HintPath>
-    </Reference>
-    <Reference Include="editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Assets/Uniton/Editor/editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/PackageCache/com.unity.render-pipelines.core@10.3.2/Editor/ShaderGenerator/ICSharpCode.NRefactory.dll</HintPath>
     </Reference>
     <Reference Include="nunit.framework">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/PackageCache/com.unity.ext.nunit@1.0.6/net35/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="mscorlib">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/mscorlib.dll</HintPath>
@@ -652,160 +646,161 @@
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/MonoBleedingEdge/lib/mono/4.7.1-api/Facades/System.Xml.XPath.XDocument.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.TestRunner">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.TestRunner">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.TestRunner.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Recorder.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.Robotics.ROSTCPConnector">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Robotics.ROSTCPConnector.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VSCode.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Shaders">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Shaders.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Robotics.URDFImporter.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Robotics.URDFImporter.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Robotics.URDFImporter.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Searcher.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Searcher.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
     </Reference>
     <Reference Include="Unity.InputSystem">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.InputSystem.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Rider.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Rider.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.ShaderLibrary">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.SpatialTracking">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.InteractionSubsystems">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.InteractionSubsystems.dll</HintPath>
     </Reference>
     <Reference Include="Unity.ShaderGraph.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.ShaderGraph.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.WindowsMixedReality.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Toolchain.Win-x86_64-Linux-x86_64">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Toolchain.Win-x86_64-Linux-x86_64.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipeline.Universal.ShaderLibrary">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipeline.Universal.ShaderLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.ARSubsystems.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.ARSubsystems.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Management">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Management.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Mathematics.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.ARSubsystems">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.ARSubsystems.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Oculus.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Oculus.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Oculus.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Recorder">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Recorder.Base">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.Base.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Recorder.Base.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Runtime">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.WindowsMixedReality">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.WindowsMixedReality.dll</HintPath>
     </Reference>
     <Reference Include="Unity.VisualStudio.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.VisualStudio.Editor.dll</HintPath>
     </Reference>
     <Reference Include="vhacd">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/vhacd.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/vhacd.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Robotics.URDFImporter">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Robotics.URDFImporter.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Robotics.URDFImporter.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Management.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Management.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Timeline.dll</HintPath>
     </Reference>
     <Reference Include="Unity.TextMeshPro">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Interaction.Toolkit">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Sysroot.Linux_x86_64">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Sysroot.Linux_x86_64.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Runtime">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Runtime.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Subsystem.Registration">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Subsystem.Registration.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Mathematics">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Mathematics.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Universal.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Universal.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.XR.LegacyInputHelpers">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEngine.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary.dll</HintPath>
     </Reference>
     <Reference Include="Unity.Timeline.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.Timeline.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.XR.LegacyInputHelpers">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.XR.LegacyInputHelpers.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Interaction.Toolkit.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Interaction.Toolkit.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.XR.Oculus">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Oculus.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.XR.Oculus.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.SpatialTracking">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/UnityEditor.SpatialTracking.dll</HintPath>
     </Reference>
     <Reference Include="Unity.RenderPipelines.Core.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.RenderPipelines.Core.Editor.dll</HintPath>
     </Reference>
     <Reference Include="Unity.SysrootPackage.Editor">
-        <HintPath>C:/Users/sholt/Desktop/Unity-Robotics-Hub/tutorials/pick_and_place/UR5Kitchen/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
+        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Library/ScriptAssemblies/Unity.SysrootPackage.Editor.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{5685e2a0-8003-f8dc-6420-57f26819e66a}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Robotics.ROSTCPConnector.csproj">
+      <Project>{cec2b9dc-7eb6-d400-cc47-9df286d62ec6}</Project>
+      <Name>Unity.Robotics.ROSTCPConnector</Name>
     </ProjectReference>
     <ProjectReference Include="Oculus.Platform.csproj">
       <Project>{a1a4914d-ce77-9dbe-dfbe-749d738a3a09}</Project>

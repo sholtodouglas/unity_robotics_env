@@ -221,6 +221,7 @@
      <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MResetInfo.cs" />
      <Compile Include="Assets\Oculus\Avatar\Samples\SocialStarter\Assets\Scripts\PlayerController.cs" />
      <Compile Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Scripts\TrackSegment.cs" />
+     <Compile Include="Assets\RosMessages\RoboticsDemo\msg\MDetailedEnvState.cs" />
      <None Include="Assets\Oculus\SampleFramework\Usage\HandsTrainExample\Shaders\XingLightShader.shader" />
      <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />
      <None Include="Assets\Oculus\Avatar\Resources\Materials\AvatarMaterialStateShader.cginc" />
@@ -510,9 +511,6 @@
     </Reference>
     <Reference Include="UnityEditor.UnityConnectModule">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/Managed/UnityEngine/UnityEditor.UnityConnectModule.dll</HintPath>
-    </Reference>
-    <Reference Include="bootstrap">
-        <HintPath>C:/Users/sholt/Desktop/robotics/unity_robotics_env/UR5Kitchen/Assets/Uniton/bootstrap.dll</HintPath>
     </Reference>
     <Reference Include="netstandard">
         <HintPath>C:/Program Files/Unity/Hub/Editor/2020.2.4f1/Editor/Data/NetStandard/ref/2.0.0/netstandard.dll</HintPath>
@@ -1002,6 +1000,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Robotics.ROSTCPConnector.csproj">
+      <Project>{cec2b9dc-7eb6-d400-cc47-9df286d62ec6}</Project>
+      <Name>Unity.Robotics.ROSTCPConnector</Name>
+    </ProjectReference>
     <ProjectReference Include="Oculus.Platform.csproj">
       <Project>{a1a4914d-ce77-9dbe-dfbe-749d738a3a09}</Project>
       <Name>Oculus.Platform</Name>
@@ -1021,10 +1023,6 @@
     <ProjectReference Include="Oculus.VR.Scripts.Editor.csproj">
       <Project>{44113506-6016-f2cf-12c3-3a3b40452069}</Project>
       <Name>Oculus.VR.Scripts.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Robotics.ROSTCPConnector.csproj">
-      <Project>{cec2b9dc-7eb6-d400-cc47-9df286d62ec6}</Project>
-      <Name>Unity.Robotics.ROSTCPConnector</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

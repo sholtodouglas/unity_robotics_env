@@ -20,7 +20,7 @@ docker run -it --gpus=all --env NVIDIA_DISABLE_REQUIRE=1 -e TZ=Australia/Sydney 
 source /opt/ros/noetic/setup.bash
 tmuxinator start -p catkin_ws/src/robotics/unity_robotics_env/mission_control.yml
 
-## To access the jupyter notebook ( and enter the token if necessary - you'll see it in the tmuxinator pane.
+## To access the jupyter notebook ( and enter the token if necessary - you'll see it in the tmuxinator pane ).
 http://127.0.0.1:8888
 
 

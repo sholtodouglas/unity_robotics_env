@@ -10,4 +10,20 @@ float32 button2
 float32 button3
 float32 drawer
 float32 door
-
+int16 obj2_present
+float32 obj2_pos_x
+float32 obj2_pos_y
+float32 obj2_pos_z
+float32 obj2_q1
+float32 obj2_q2
+float32 obj2_q3
+float32 obj2_q4
+float32 button1_x
+float32 button1_y
+float32 button1_z
+float32 button2_x
+float32 button2_y
+float32 button2_z
+float32 button3_x
+float32 button3_y
+float32 button3_z
