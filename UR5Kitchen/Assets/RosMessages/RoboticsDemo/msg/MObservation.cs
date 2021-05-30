@@ -20,6 +20,7 @@ namespace RosMessageTypes.RoboticsDemo
         public byte[] imq3;
         public byte[] imq4;
         public double time;
+        public MResetAngles resetAngles;
 
         public MObservation()
         {
@@ -32,9 +33,10 @@ namespace RosMessageTypes.RoboticsDemo
             this.imq3 = new byte[0];
             this.imq4 = new byte[0];
             this.time = 0.0;
+            this.resetAngles = new MResetAngles();
         }
 
-        public MObservation(MQuaternionProprioState proprio, MAchievedGoal ag, MVelocities vels, Sensor.MImage shoulderImage, Sensor.MImage gripperImage, byte[] imq2, byte[] imq3, byte[] imq4, double time)
+        public MObservation(MQuaternionProprioState proprio, MAchievedGoal ag, MVelocities vels, Sensor.MImage shoulderImage, Sensor.MImage gripperImage, byte[] imq2, byte[] imq3, byte[] imq4, double time, MResetAngles resetAngles)
         {
             this.proprio = proprio;
             this.ag = ag;
@@ -45,6 +47,7 @@ namespace RosMessageTypes.RoboticsDemo
             this.imq3 = imq3;
             this.imq4 = imq4;
             this.time = time;
+            this.resetAngles = resetAngles;
         }
         public override List<byte[]> SerializationStatements()
         {
@@ -64,6 +67,7 @@ namespace RosMessageTypes.RoboticsDemo
             listOfSerializations.Add(BitConverter.GetBytes(imq4.Length));
             listOfSerializations.Add(this.imq4);
             listOfSerializations.Add(BitConverter.GetBytes(this.time));
+            listOfSerializations.AddRange(resetAngles.SerializationStatements());
 
             return listOfSerializations;
         }
@@ -104,6 +108,7 @@ namespace RosMessageTypes.RoboticsDemo
             }
             this.time = BitConverter.ToDouble(data, offset);
             offset += 8;
+            offset = this.resetAngles.Deserialize(data, offset);
 
             return offset;
         }
@@ -119,7 +124,8 @@ namespace RosMessageTypes.RoboticsDemo
             "\nimq2: " + System.String.Join(", ", imq2.ToList()) +
             "\nimq3: " + System.String.Join(", ", imq3.ToList()) +
             "\nimq4: " + System.String.Join(", ", imq4.ToList()) +
-            "\ntime: " + time.ToString();
+            "\ntime: " + time.ToString() +
+            "\nresetAngles: " + resetAngles.ToString();
         }
     }
 }

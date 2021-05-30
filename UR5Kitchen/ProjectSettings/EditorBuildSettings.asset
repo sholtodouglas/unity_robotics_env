@@ -5,9 +5,12 @@ EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Scenes:
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/VRWControllers.unity
     guid: cce6531d91ca8be41b86f9e5020ac460
+  - enabled: 1
+    path: Assets/Scenes/fronton.unity
+    guid: cbb70ee38287da7468b6f2a711c10a66
   m_configObjects:
     Unity.XR.Oculus.Settings: {fileID: 11400000, guid: 8ce5c4103eee5374ead52073ae86c915, type: 2}
     Unity.XR.WindowsMR.Settings: {fileID: 11400000, guid: 8baaf2bb6617c7340981e19cfdc62ca8, type: 2}

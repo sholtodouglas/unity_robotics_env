@@ -10,4 +10,5 @@ float64 data_processed_time
 float64 beat_sent_time
 float64 act_begin_time
 float64 model_processed_time
+ResetAngles resetAngles
 

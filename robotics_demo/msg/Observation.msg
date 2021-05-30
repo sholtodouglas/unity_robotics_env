@@ -7,6 +7,4 @@ uint8[] imq2
 uint8[] imq3
 uint8[] imq4
 float64 time
-
-
-
+ResetAngles resetAngles

@@ -220,7 +220,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 20649756}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fbf4c79288754864b8d522b69f4b52a8, type: 3}
   m_Name: 
@@ -372,7 +372,7 @@ MonoBehaviour:
   torque: 100
   acceleration: 30
   handAnchor: {fileID: 2105265533}
-  useVR: 1
+  useVR: 0
   cameraTransform: {fileID: 81917358}
   shoulderCam: {fileID: 1300881118}
   gripperCam: {fileID: 1396515319}
@@ -861,7 +861,7 @@ ConfigurableJoint:
     maximumForce: 3.4028233e+38
   m_YDrive:
     serializedVersion: 3
-    positionSpring: 200
+    positionSpring: 2000
     positionDamper: 10
     maximumForce: 3.4028233e+38
   m_ZDrive:
@@ -11156,7 +11156,7 @@ ConfigurableJoint:
     maximumForce: 3.4028233e+38
   m_YDrive:
     serializedVersion: 3
-    positionSpring: 200
+    positionSpring: 2000
     positionDamper: 10
     maximumForce: 3.4028233e+38
   m_ZDrive:
@@ -12167,7 +12167,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 53.4
   orthographic: 0
   orthographic size: 5
   m_Depth: 0
@@ -12743,7 +12743,7 @@ ConfigurableJoint:
     maximumForce: 3.4028233e+38
   m_YDrive:
     serializedVersion: 3
-    positionSpring: 200
+    positionSpring: 2000
     positionDamper: 10
     maximumForce: 3.4028233e+38
   m_ZDrive:
@@ -17387,7 +17387,7 @@ GameObject:
   - component: {fileID: 1565706999}
   - component: {fileID: 1563840071}
   m_Layer: 6
-  m_Name: Collider 18
+  m_Name: tabletop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

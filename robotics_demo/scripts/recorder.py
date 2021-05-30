@@ -16,7 +16,7 @@ import os, inspect
 currentdir = os.path.dirname(os.path.abspath(inspect.getfile(inspect.currentframe())))
 print("current_dir=" + currentdir)
 os.sys.path.insert(0, currentdir)
-from utils import rosImg_to_numpy, proprio_quat_to_rpy_vector, proprio_rpy_to_ROSmsg, ag_to_vector, ag_to_ROSmsg, proprio_rpy_to_rpy_vector
+from utils import rosImg_to_numpy, proprio_quat_to_rpy_vector, proprio_rpy_to_ROSmsg, ag_to_vector, ag_to_ROSmsg, proprio_rpy_to_rpy_vector, ras_to_vector
 from std_msgs.msg import String
 from tqdm import tqdm
 import shutil
@@ -26,7 +26,7 @@ RECORDING = False
 stepCount = 0
 # Lets just pipe it direct into LFP
 PACKAGE_LOCATION = os.path.dirname(os.path.realpath(__file__))[:-(len("/unity_robotics_env/robotics_demo/scripts"))] + '/learning_from_play/'
-base_path = PACKAGE_LOCATION +'/data/diverse/'
+base_path = PACKAGE_LOCATION +'/data/diverse_new/'
 obs_act_path = base_path + 'obs_act_etc/'
 env_state_path = base_path + 'states_and_ims/'
 example_path = None
@@ -38,10 +38,11 @@ ag_array = []
 times_array = []
 shoulder_imgs = []
 gripper_imgs = []
+joints_array = []
 
 last_tstep_received = 0
 
-RAM_LIMIT = 10000 # How many images its reasonable to store in memory before we get dangerous
+RAM_LIMIT = 5000 # How many images its reasonable to store in memory before we get dangerous
 
 saving_status = rospy.Publisher('saving_status', String, queue_size=1)
 
@@ -65,6 +66,7 @@ def save_timestep(timestep: ToRecord):
 
         act = timestep.a 
         acts_array.append(proprio_rpy_to_rpy_vector(timestep.a))
+        joints_array.append(ras_to_vector(timestep.resetAngles))
 
         times_array.append({'timestep': timestep.timestep, 'data_gen_time': timestep.data_gen_time,
                     'data_arrival_time': timestep.data_arrival_time, 'data_processed_time': timestep.data_processed_time, 
@@ -91,17 +93,17 @@ def start_recording(b: Bool):
 
 def save_trajectory(x: RPYState):
     
-    global RECORDING, obs_array, acts_array, ag_array, times_array, shoulder_imgs, gripper_imgs
+    global RECORDING, obs_array, acts_array, ag_array, times_array, shoulder_imgs, gripper_imgs, joints_array
     try:
         if RECORDING:
             ping()
             saving_status.publish("Saving")
             RECORDING = False
-            np.savez(npz_path + '/data', acts=acts_array, obs=obs_array, achieved_goals=ag_array, times=times_array, allow_pickle=True)
+            np.savez(npz_path + '/data', acts=acts_array, obs=obs_array, achieved_goals=ag_array, times=times_array, resetAngles = joints_array, allow_pickle=True)
             for i in tqdm(range(0, len(gripper_imgs))):
                 plt.imsave(example_path + f'/ims/{i}_shoulder.jpg', shoulder_imgs[i])
                 plt.imsave(example_path + f'/ims/{i}_gripper.jpg', gripper_imgs[i])
-            obs_array, acts_array, ag_array, times_array, shoulder_imgs, gripper_imgs = [], [], [], [], [], []
+            obs_array, acts_array, ag_array, times_array, shoulder_imgs, gripper_imgs, joints_array = [], [], [], [], [], [], []
             # might do us well to include stuff like controllable achieved goal TODO
             print(f"Recorded {npz_path}")
             saving_status.publish("Not recording")

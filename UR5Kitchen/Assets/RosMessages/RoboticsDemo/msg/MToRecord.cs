@@ -23,6 +23,7 @@ namespace RosMessageTypes.RoboticsDemo
         public double beat_sent_time;
         public double act_begin_time;
         public double model_processed_time;
+        public MResetAngles resetAngles;
 
         public MToRecord()
         {
@@ -38,9 +39,10 @@ namespace RosMessageTypes.RoboticsDemo
             this.beat_sent_time = 0.0;
             this.act_begin_time = 0.0;
             this.model_processed_time = 0.0;
+            this.resetAngles = new MResetAngles();
         }
 
-        public MToRecord(MRPYState state, MVelocities vels, Sensor.MImage shoulderImage, Sensor.MImage gripperImage, MPositionCommand a, int timestep, double data_gen_time, double data_arrival_time, double data_processed_time, double beat_sent_time, double act_begin_time, double model_processed_time)
+        public MToRecord(MRPYState state, MVelocities vels, Sensor.MImage shoulderImage, Sensor.MImage gripperImage, MPositionCommand a, int timestep, double data_gen_time, double data_arrival_time, double data_processed_time, double beat_sent_time, double act_begin_time, double model_processed_time, MResetAngles resetAngles)
         {
             this.state = state;
             this.vels = vels;
@@ -54,6 +56,7 @@ namespace RosMessageTypes.RoboticsDemo
             this.beat_sent_time = beat_sent_time;
             this.act_begin_time = act_begin_time;
             this.model_processed_time = model_processed_time;
+            this.resetAngles = resetAngles;
         }
         public override List<byte[]> SerializationStatements()
         {
@@ -70,6 +73,7 @@ namespace RosMessageTypes.RoboticsDemo
             listOfSerializations.Add(BitConverter.GetBytes(this.beat_sent_time));
             listOfSerializations.Add(BitConverter.GetBytes(this.act_begin_time));
             listOfSerializations.Add(BitConverter.GetBytes(this.model_processed_time));
+            listOfSerializations.AddRange(resetAngles.SerializationStatements());
 
             return listOfSerializations;
         }
@@ -95,6 +99,7 @@ namespace RosMessageTypes.RoboticsDemo
             offset += 8;
             this.model_processed_time = BitConverter.ToDouble(data, offset);
             offset += 8;
+            offset = this.resetAngles.Deserialize(data, offset);
 
             return offset;
         }
@@ -113,7 +118,8 @@ namespace RosMessageTypes.RoboticsDemo
             "\ndata_processed_time: " + data_processed_time.ToString() +
             "\nbeat_sent_time: " + beat_sent_time.ToString() +
             "\nact_begin_time: " + act_begin_time.ToString() +
-            "\nmodel_processed_time: " + model_processed_time.ToString();
+            "\nmodel_processed_time: " + model_processed_time.ToString() +
+            "\nresetAngles: " + resetAngles.ToString();
         }
     }
 }

@@ -1,0 +1,12 @@
+float32 shoulder
+float32 upper_arm
+float32 forearm
+float32 wrist_1
+float32 wrist_2
+float32 wrist_3
+float32 outer_knuckle_left
+float32 inner_finger_left
+float32 inner_knuckle_left
+float32 outer_knuckle_right
+float32 inner_finger_right
+float32 inner_knuckle_right

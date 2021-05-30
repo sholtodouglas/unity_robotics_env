@@ -45,6 +45,7 @@ proprioceptive_state = None
 achieved_goal = None
 full_state = None
 velocities = None
+resetAnglesMsg = None
 last_state_arrival_time = 0
 last_state_processed_time = 0  # unless updated then the if check will fail because 0 is too long ago
 last_vr_controller_time = 0
@@ -89,7 +90,8 @@ def process_observation(o: Observation):
     '''
     global shoulder_image, gripper_image, proprioceptive_state, \
             achieved_goal, full_state, last_state_arrival_time, \
-            last_state_processed_time, ros_shoulder_image, ros_gripper_image, velocities, last_state_gen_time
+            last_state_processed_time, ros_shoulder_image, ros_gripper_image, velocities, last_state_gen_time, resetAnglesMsg
+
     last_state_gen_time = o.time
     last_state_arrival_time = time.time()
     o.shoulderImage.data += (o.imq2 + o.imq3 + o.imq4)
@@ -102,6 +104,8 @@ def process_observation(o: Observation):
     # print(f"State: {proprioceptive_state}")
     achieved_goal = ag_to_vector(o.ag)
     velocities = o.vels
+    resetAnglesMsg = o.resetAngles
+    # print(resetAnglesMsg)
     full_state = np.concatenate([proprioceptive_state, achieved_goal])
     last_state_processed_time = time.time()
 
@@ -124,7 +128,7 @@ def act(b: TimerBeat):
     a) an xyzrpygripper act on topic 'xyz_rpy_g_command', which gets converted to joint angles by 'xyz_rpy_g_to_joints.py'
     b) a combined state + act on topic 'transition', for the recorder to record
     '''
-    global  g,z, vr_controller_pos, shoulder_image, gripper_image, proprioceptive_state, full_state, velocities, a_vector
+    global  g,z, vr_controller_pos, shoulder_image, gripper_image, proprioceptive_state, full_state, velocities, a_vector, resetAnglesMsg
 
     #print([x,y,z])
     #print(pybullet.getEulerFromQuaternion([-q2, -q1, q4, q3])) # at rest, should be 0,0,0
@@ -177,7 +181,7 @@ def act(b: TimerBeat):
         ag = ag_to_ROSmsg(achieved_goal_cp)
         state = RPYState(proprio, ag)
         timestep = ToRecord(state, velocities, ros_shoulder_image_cp, ros_gripper_image_cp, a, b.timestep,\
-            last_state_gen_time_cp, last_state_arrival_time_cp, last_state_processed_time_cp,  b.time, act_begin_time, model_processed_time)
+            last_state_gen_time_cp, last_state_arrival_time_cp, last_state_processed_time_cp,  b.time, act_begin_time, model_processed_time, resetAnglesMsg)
         # # and publish this for the saver to record
         transition_pub.publish(timestep)
         a_vector =  proprio_rpy_to_rpy_vector(a)

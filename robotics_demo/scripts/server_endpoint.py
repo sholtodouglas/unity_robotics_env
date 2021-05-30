@@ -7,7 +7,7 @@ from ros_tcp_endpoint import TcpServer, RosPublisher, RosSubscriber, RosService,
 from robotics_demo.msg import JointPositions, PositionCommand, QuaternionProprioState, Observation, Goal, RPYState, ResetInfo, Reengage
 from sensor_msgs.msg import Image
 from std_msgs.msg import Bool, String
-from robotics_demo.srv import getState, getTime
+from robotics_demo.srv import getState, getTime, reset
 
 def main():
     ros_node_name = rospy.get_param("/TCP_NODE_NAME", 'TCPServer')
@@ -42,7 +42,9 @@ def main():
         'toggleHalt': RosSubscriber("toggleHalt", Reengage, tcp_server),
         'saving_status': RosSubscriber("saving_status", String, tcp_server),
         'getTime': UnityService('getTime', getTime, tcp_server),
-        'getState': UnityService('getState', getState, tcp_server)
+        'getState': UnityService('getState', getState, tcp_server),
+        'resetAndGetState': UnityService('resetAndGetState', reset, tcp_server),
+        'randomise': RosSubscriber("randomise", Reengage, tcp_server),
         #'imageTest': RosPublisher('imageTest', ImageTest, queue_size=1),
         # getting the exact joint angles is highly fraught (clearly unity immature for robotics), so would rather get exact pose and return required IK
         # which is much more accurate
