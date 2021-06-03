@@ -1051,7 +1051,7 @@ public class VRControllerController: MonoBehaviour
     void randomise(Reengage i) {
         print("Randomisg");
         GameObject light = GameObject.Find("Directional Light");
-        Vector3 new_ori = new Vector3(RandomFloat(-180, 180), RandomFloat(-1, 1) ,RandomFloat(-1, 1));
+        Vector3 new_ori = new Vector3(RandomFloat(20, 80), RandomFloat(-180, 180) ,RandomFloat(-5, 5));
         light.transform.eulerAngles = new_ori;
 
         GameObject table = GameObject.Find("PRE_FUR_Kitchen_counter_01_07");
