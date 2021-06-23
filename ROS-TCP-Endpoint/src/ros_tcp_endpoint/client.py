@@ -17,18 +17,18 @@ import socket
 import rospy
 from io import BytesIO
 
-from threading import Thread
+import threading
 
 from .exceptions import TopicOrServiceNameDoesNotExistError
 from ros_tcp_endpoint.msg import RosUnitySrvMessage
-from ros_tcp_endpoint.srv import UnityHandshakeRequest, UnityHandshakeResponse
 
 
-class ClientThread(Thread):
+class ClientThread(threading.Thread):
     """
     Thread class to read all data from a connection and pass along the data to the
     desired source.
     """
+
     def __init__(self, conn, tcp_server, incoming_ip, incoming_port):
         """
         Set class variables
@@ -40,7 +40,7 @@ class ClientThread(Thread):
         self.tcp_server = tcp_server
         self.incoming_ip = incoming_ip
         self.incoming_port = incoming_port
-        Thread.__init__(self)
+        threading.Thread.__init__(self)
 
     @staticmethod
     def recvall(conn, size, flags=0):
@@ -53,7 +53,7 @@ class ClientThread(Thread):
         while pos < size:
             read = conn.recv_into(view[pos:], size - pos, flags)
             if not read:
-                raise Exception("No more data available")
+                raise IOError("No more data available")
             pos += read
         return bytes(buffer)
 
@@ -66,7 +66,7 @@ class ClientThread(Thread):
 
         """
         raw_bytes = ClientThread.recvall(conn, 4)
-        num = struct.unpack('<I', raw_bytes)[0]
+        num = struct.unpack("<I", raw_bytes)[0]
         return num
 
     @staticmethod
@@ -82,7 +82,7 @@ class ClientThread(Thread):
         str_len = ClientThread.read_int32(conn)
 
         str_bytes = ClientThread.recvall(conn, str_len)
-        decoded_str = str_bytes.decode('utf-8')
+        decoded_str = str_bytes.decode("utf-8")
 
         return decoded_str
 
@@ -92,7 +92,7 @@ class ClientThread(Thread):
         Decode destination and full message size from socket connection.
         Grab bytes in chunks until full message has been read.
         """
-        data = b''
+        data = b""
 
         destination = ClientThread.read_string(conn)
         full_message_size = ClientThread.read_int32(conn)
@@ -103,13 +103,13 @@ class ClientThread(Thread):
             packet = ClientThread.recvall(conn, grab)
 
             if not packet:
-                print("No packets...")
+                rospy.logerr("No packets...")
                 break
 
             data += packet
 
         if full_message_size > 0 and not data:
-            print("No data for a message size of {}, breaking!".format(full_message_size))
+            rospy.logerr("No data for a message size of {}, breaking!".format(full_message_size))
             return
 
         return destination, data
@@ -126,9 +126,9 @@ class ClientThread(Thread):
         Returns:
             serialized destination and message as a list of bytes
         """
-        dest_bytes = destination.encode('utf-8')
+        dest_bytes = destination.encode("utf-8")
         length = len(dest_bytes)
-        dest_info = struct.pack('<I%ss' % length, length, dest_bytes)
+        dest_info = struct.pack("<I%ss" % length, length, dest_bytes)
 
         serial_response = BytesIO()
         message.serialize(serial_response)
@@ -140,7 +140,7 @@ class ClientThread(Thread):
         # SEEK_END or 2 - end of the stream; offset is usually negative
         response_len = serial_response.seek(0, 2)
 
-        msg_length = struct.pack('<I', response_len)
+        msg_length = struct.pack("<I", response_len)
         serialized_message = dest_info + msg_length + serial_response.getvalue()
 
         return serialized_message
@@ -160,75 +160,69 @@ class ClientThread(Thread):
             msg: the ROS msg type as bytes
 
         """
-        print("Connection from {}".format(self.incoming_ip))
-        sender_halt = [False]
-        reader_halt = [False]
-        self.tcp_server.unity_tcp_sender.start_sender(self.conn, reader_halt, sender_halt)
+        rospy.loginfo("Connection from {}".format(self.incoming_ip))
+        halt_event = threading.Event()
+        self.tcp_server.unity_tcp_sender.start_sender(self.conn, halt_event)
         try:
-            while True:
-                if reader_halt[0]:
-                    return
-                
+            while not halt_event.is_set():
                 destination, data = self.read_message(self.conn)
 
-                if destination == '':
-                    #ignore this keepalive message, listen for more
+                if destination == "":
+                    # ignore this keepalive message, listen for more
                     pass
-                elif destination == '__syscommand':
-                    #handle a system command, such as registering new topics
+                elif destination == "__syscommand":
+                    # handle a system command, such as registering new topics
                     self.tcp_server.handle_syscommand(data)
-                elif destination == '__srv':
+                elif destination == "__srv":
                     # handle a ros service message request, or a unity service message response
-                    srvMessage = RosUnitySrvMessage().deserialize(data)
-                    if not srvMessage.is_request:
-                        self.tcp_server.send_unity_service_response(srvMessage.srv_id, srvMessage.payload)
+                    srv_message = RosUnitySrvMessage().deserialize(data)
+                    if not srv_message.is_request:
+                        self.tcp_server.send_unity_service_response(
+                            srv_message.srv_id, srv_message.payload
+                        )
                         continue
-                    elif srvMessage.topic == '__topic_list':
+                    elif srv_message.topic == "__topic_list":
                         response = self.tcp_server.topic_list(data)
-                    elif srvMessage.topic not in self.tcp_server.source_destination_dict.keys():
-                        error_msg = "Service destination '{}' is not registered! Known topics are: {} "\
-                            .format(srvMessage.topic, self.tcp_server.source_destination_dict.keys())
+                    elif srv_message.topic not in self.tcp_server.source_destination_dict.keys():
+                        error_msg = "Service destination '{}' is not registered! Known topics are: {} ".format(
+                            srv_message.topic, self.tcp_server.source_destination_dict.keys()
+                        )
                         self.tcp_server.send_unity_error(error_msg)
-                        print(error_msg)
+                        rospy.logerr(error_msg)
                         # TODO: send a response to Unity anyway?
-                        continue                        
+                        continue
                     else:
-                        ros_communicator = self.tcp_server.source_destination_dict[srvMessage.topic]
-                        try:
-                            response = ros_communicator.send(data)
-                            if not response:
-                                error_msg = "No response data from service '{}'!".format(srvMessage.topic)
-                                self.tcp_server.send_unity_error(error_msg)
-                                print(error_msg)
-                                # TODO: send a response to Unity anyway?
-                                continue
-                        except Exception as e:
-                            print("Exception while calling service {}: {}".format(e))
+                        ros_communicator = self.tcp_server.source_destination_dict[
+                            srv_message.topic
+                        ]
+                        response = ros_communicator.send(srv_message.payload)
+                        if not response:
+                            error_msg = "No response data from service '{}'!".format(
+                                srv_message.topic
+                            )
+                            self.tcp_server.send_unity_error(error_msg)
+                            rospy.logerr(error_msg)
                             # TODO: send a response to Unity anyway?
                             continue
-                    
+
                     serial_response = BytesIO()
                     response.serialize(serial_response)
-                    response_message = RosUnitySrvMessage(srvMessage.srv_id, False, '', serial_response.getvalue())
+                    response_message = RosUnitySrvMessage(
+                        srv_message.srv_id, False, "", serial_response.getvalue()
+                    )
                     self.tcp_server.unity_tcp_sender.send_unity_message("__srv", response_message)
-                elif destination in self.tcp_server.source_destination_dict.keys():
+                elif destination in self.tcp_server.source_destination_dict:
                     ros_communicator = self.tcp_server.source_destination_dict[destination]
-                    try:
-                        response = ros_communicator.send(data)
-                    except Exception as e:
-                        print("Exception on Publish: {}".format(e))
-                        continue
+                    response = ros_communicator.send(data)
                 else:
-                    error_msg = "Topic '{}' is not registered! Known topics are: {} "\
-                        .format(destination, self.tcp_server.source_destination_dict.keys())
+                    error_msg = "Topic '{}' is not registered! Known topics are: {} ".format(
+                        destination, self.tcp_server.source_destination_dict.keys()
+                    )
                     self.tcp_server.send_unity_error(error_msg)
-                    print(error_msg)
-        except Exception as e:
-            print("Exception on Read: {}".format(e))
-            return
+                    rospy.logerr(error_msg)
+        except IOError as e:
+            rospy.logerr("Exception: {}".format(e))
         finally:
-            print("Disconnected");
-            sender_halt[0] = True
-            if not reader_halt[0]:
-                self.conn.close()
-            return
+            halt_event.set()
+            self.conn.close()
+            rospy.loginfo("Disconnected from {}".format(self.incoming_ip))
