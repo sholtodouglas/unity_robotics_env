@@ -12,4 +12,8 @@ config.py
 /UR5Kitchen/Assets/Complete_Home_Interior_Pack/*
 /UR5Kitchen/Library/*
 /UR5Kitchen/obj/Debug/*
-/UR5Kitchen/Library/*
+/UR5Kitchen/Logs/*
+/UR5Kitchen/Temp/*
+/UR5Kitchen/UserSettings/*
+/topDownBuild/*
+/UR5Kitchen/Temp/*

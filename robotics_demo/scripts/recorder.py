@@ -26,7 +26,7 @@ RECORDING = False
 stepCount = 0
 # Lets just pipe it direct into LFP
 PACKAGE_LOCATION = os.path.dirname(os.path.realpath(__file__))[:-(len("/unity_robotics_env/robotics_demo/scripts"))] + '/learning_from_play/'
-base_path = PACKAGE_LOCATION +'/data/diverse_new/'
+base_path = PACKAGE_LOCATION +'/data/diverse_new_test/'
 obs_act_path = base_path + 'obs_act_etc/'
 env_state_path = base_path + 'states_and_ims/'
 example_path = None
@@ -100,9 +100,9 @@ def save_trajectory(x: RPYState):
             saving_status.publish("Saving")
             RECORDING = False
             np.savez(npz_path + '/data', acts=acts_array, obs=obs_array, achieved_goals=ag_array, times=times_array, resetAngles = joints_array, allow_pickle=True)
-            for i in tqdm(range(0, len(gripper_imgs))):
-                plt.imsave(example_path + f'/ims/{i}_shoulder.jpg', shoulder_imgs[i])
-                plt.imsave(example_path + f'/ims/{i}_gripper.jpg', gripper_imgs[i])
+            # for i in tqdm(range(0, len(gripper_imgs))):
+            #     plt.imsave(example_path + f'/ims/{i}_shoulder.jpg', shoulder_imgs[i])
+            #     plt.imsave(example_path + f'/ims/{i}_gripper.jpg', gripper_imgs[i])
             obs_array, acts_array, ag_array, times_array, shoulder_imgs, gripper_imgs, joints_array = [], [], [], [], [], [], []
             # might do us well to include stuff like controllable achieved goal TODO
             print(f"Recorded {npz_path}")

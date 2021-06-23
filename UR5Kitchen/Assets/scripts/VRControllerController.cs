@@ -175,7 +175,7 @@ public class VRControllerController: MonoBehaviour
     {
         print("Start waiting");
 
-        yield return new WaitForSeconds(2);
+        yield return new WaitForSeconds(4);
         int defDyanmicVal = 10;
         foreach (ArticulationBody joint in articulationChain)
         {
@@ -240,7 +240,7 @@ public class VRControllerController: MonoBehaviour
             joint.jointFriction = defDyanmicVal;
             joint.angularDamping = defDyanmicVal;
             ArticulationDrive currentDrive = joint.xDrive;
-            currentDrive.forceLimit = 10;
+            currentDrive.forceLimit = 1;
             joint.xDrive = currentDrive;
         }
         StartCoroutine (EngageForceAfterInit());
@@ -313,7 +313,7 @@ public class VRControllerController: MonoBehaviour
         resetArticulation(11, 2, joints.outer_knuckle_left);
         resetArticulation(13, 2, joints.inner_finger_left);
         resetArticulation(15, 2, joints.inner_knuckle_left);
-        //resetArticulation(16, 2, joints.outer_knuckle_right);
+        resetArticulation(16, 2, joints.outer_knuckle_right);
         resetArticulation(18, 2, joints.inner_finger_right);
         resetArticulation(20, 2, joints.inner_knuckle_right);
 
@@ -560,6 +560,26 @@ public class VRControllerController: MonoBehaviour
 
     }
     void publishObs() {
+        
+        // resetArticulation(11, 2, 228F);
+        // resetArticulation(13, 2, 42F);
+        // resetArticulation(15, 2, 228F);
+        // resetArticulation(16, 2, 48F);
+        // resetArticulation(18, 2, 41F);
+        // resetArticulation(20, 2, 48F);
+        // special case
+        // Vector3 originalRotation = articulationChain[16].transform.eulerAngles;
+        // Vector3 resetRotation = new Vector3(-180,0, 0);
+        // resetRotation[2] = 48;
+        // articulationChain[16].transform.localEulerAngles = resetRotation; // turns out doesn't work - some conflict between reset and set xdrive?
+
+
+        // // special case
+        // originalRotation = articulationChain[20].transform.eulerAngles;
+        // resetRotation = new Vector3(-180,0, 0);
+        // resetRotation[2] = 48;
+        // articulationChain[20].transform.localEulerAngles = resetRotation; // turns out doesn't work - some conflict between reset and set xdrive?
+
         ros.Send("state", getState());    
     }
 
@@ -640,6 +660,13 @@ public class VRControllerController: MonoBehaviour
         joints.wrist_2 = 38.8F;
         joints.wrist_3 = 0.0F;
         joints.gripper = 0.0F;
+        print("-----------------------------");
+        resetArticulation(11, 2, 228F);
+        resetArticulation(13, 2, 42F);
+        resetArticulation(15, 2, 228F);
+        resetArticulation(16, 2, 48F);
+        resetArticulation(18, 2, 41F);
+        resetArticulation(20, 2, 48F);
 
         articulate_joints(joints);
     }
