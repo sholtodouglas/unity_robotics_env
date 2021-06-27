@@ -14,6 +14,10 @@ There are three steps
 cd Desktop/robotics
 docker run -it --gpus=all --env NVIDIA_DISABLE_REQUIRE=1 -e TZ=Australia/Sydney -p 10000:10000 -p 5005:5005 -p 8888:8888 -v %cd%:/catkin_ws/src/robotics sholto/robotics 
 docker run -it --env NVIDIA_DISABLE_REQUIRE=1 -e TZ=Australia/Sydney -p 10000:10000 -p 5005:5005 -p 8888:8888 -v %cd%:/catkin_ws/src/robotics sholto/robotics
+
+docker run -it --gpus=all --env NVIDIA_DISABLE_REQUIRE=1 -e TZ=Australia/Sydney -p 10000:10000 -p 5005:5005 -p 8888:8888 -v $(pwd):/catkin_ws/src/robotics sholto/robotics:gpu 
+cd ..
+
 ```
 ## Once in the container, run this
 ```
